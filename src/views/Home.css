@@ -1,0 +1,94 @@
+/* ============================================
+   Home.css — Estilos específicos de la vista Home
+   ============================================ */
+
+/* ── ROW 2: Título + fila de badges ── */
+/* Le damos suficiente altura para que el título estirado no choque con
+   la fila de arriba ni con las cards. El transform CSS no ocupa espacio real. */
+.title-row {
+  height: 8rem;
+  /* altura real del contenedor */
+}
+
+@media (min-width: 768px) {
+  .title-row {
+    height: 11rem;
+  }
+}
+
+/* El título ocupa todo el ancho del grid y se escala verticalmente */
+.title-p-plan {
+  font-size: 160px;
+  transform: scaleY(1.2);
+  transform-origin: center;
+  display: block;
+  line-height: 1;
+}
+
+.subtitle-p-plan {
+  font-size: 32px;
+}
+
+/* Posiciones absolutas de los badges respecto a .title-row */
+.badge-left {
+  left: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.badge-center-bottom {
+  left: 38%;
+  bottom: 2%;
+}
+
+.badge-right-top {
+  right: 18%;
+  top: 10%;
+}
+
+.badge-right {
+  right: 0%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Preservar perspectiva 3D para animación de las cards */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* ── Colores de redes sociales ── */
+.social-fb {
+  background-color: #1877f2;
+  color: #ffffff;
+}
+
+.social-x {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.social-wa {
+  background-color: #25d366;
+  color: #ffffff;
+}
+
+.social-tg {
+  background-color: #0088cc;
+  color: #ffffff;
+}
+
+.social-msg {
+  background-color: #a222f7;
+  color: #ffffff;
+}
+
+.social-snap {
+  background-color: #fffc00;
+  color: #000000;
+}
+
+.social-ig {
+  background-color: #e1306c;
+  color: #ffffff;
+}
