@@ -29,6 +29,14 @@ const plans = [
   }
 ];
 
+// Propuesta 3: Factor de escala máxima por proximidad (Efecto Lupa/Magnético)
+const BADGE_CONFIG = [
+  { id: 'badge-left', maxScale: 1.25 },
+  { id: 'badge-center-bottom', maxScale: 1.15 },
+  { id: 'badge-right-top', maxScale: 1.30 },
+  { id: 'badge-right', maxScale: 1.20 },
+];
+
 export default function Home() {
   const sectionRef = useRef(null);
 
@@ -41,21 +49,83 @@ export default function Home() {
         duration: 5, yoyo: true, repeat: -1, ease: 'sine.inOut'
       });
 
-      tl.from('.header-text', { y: -30, opacity: 0, duration: 0.8, ease: 'power3.out' });
-      tl.from('.title-plan-familiar', { y: 60, opacity: 0, duration: 1, ease: 'back.out(1.5)' }, '-=0.4');
+      tl.from('.subtitle-p-plan', { y: -30, opacity: 0, duration: 0.8, ease: 'power3.out' });
+      tl.from('.title-p-plan', { y: 60, opacity: 0, duration: 1, ease: 'back.out(1.5)' }, '-=0.4');
       tl.from('.floating-badge', {
         scale: 0, opacity: 0, rotation: 'random(-20, 20)', duration: 0.6, stagger: 0.15, ease: 'back.out(2.5)'
       }, '-=0.6');
+
+      // Flote continuo base (amplitude pequeña; el parallax añade movimiento encima)
       gsap.to('.floating-badge', {
-        y: -12, yoyo: true, repeat: -1, duration: 2.5, stagger: { each: 0.2, from: 'random' }, ease: 'sine.inOut'
+        y: -10, yoyo: true, repeat: -1, duration: 2.5, stagger: { each: 0.2, from: 'random' }, ease: 'sine.inOut'
       });
+
+      // ── Propuesta 3: Proximidad Orgánica (Efecto Lupa/Respiración) ──
+      // Los badges reaccionan expandiéndose en función de qué tan cerca está el cursor de ellos físicamente.
+      const section = sectionRef.current;
+      const badgeEls = BADGE_CONFIG.map(({ id }) => section.querySelector('.' + id));
+
+      const onMouseMove = (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const effectRadius = 350; // Distancia en píxeles donde el ratón empieza a "afectar" al badge
+
+        BADGE_CONFIG.forEach(({ maxScale }, i) => {
+          const el = badgeEls[i];
+          if (!el) return;
+
+          const rect = el.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          const dist = Math.sqrt(Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2));
+
+          let newScale = 1;
+          if (dist < effectRadius) {
+            // Factor de cercanía de 0 a 1 (1 es estar justo encima, 0 es estar lejos)
+            const proximity = (effectRadius - dist) / effectRadius;
+            newScale = 1 + (maxScale - 1) * proximity;
+          }
+
+          gsap.to(el, {
+            scale: newScale,
+            duration: 0.6,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          });
+        });
+      };
+
+      const onMouseLeave = () => {
+        badgeEls.forEach(el => {
+          if (!el) return;
+          gsap.to(el, { scale: 1, duration: 1.0, ease: 'power2.out', overwrite: 'auto' });
+        });
+      };
+
+      section.addEventListener('mousemove', onMouseMove);
+      section.addEventListener('mouseleave', onMouseLeave);
+
       tl.from('.card-item', {
         y: 100, opacity: 0, rotationY: 15, duration: 0.9, stagger: 0.15, ease: 'power4.out'
       }, '-=0.3');
       tl.from('.bottom-text', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+      // Animación de entrada para los íconos de redes (Flip 3D desde abajo)
       tl.from('.app-icon', {
-        scale: 0, rotation: -180, opacity: 0, duration: 0.5, stagger: 0.05, ease: 'back.out(2)'
+        y: 60,
+        rotationX: -90,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'back.out(1.5)',
+        clearProps: 'all'
       }, '-=0.2');
+
+      return () => {
+        section.removeEventListener('mousemove', onMouseMove);
+        section.removeEventListener('mouseleave', onMouseLeave);
+      };
     }, sectionRef);
 
     return () => ctx.revert();
@@ -90,17 +160,17 @@ export default function Home() {
               </h2>
 
               {/* Badges */}
-              <span className="floating-badge badge-left bg-pink-300 text-pink-900 border-2 border-pink-400 px-3 py-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center gap-1.5 absolute z-10">
-                <img src={socialMediaIcon} alt="Icono Redes Sociales" className="w-4 h-4 md:w-5 md:h-5 object-contain" /> REDES SOCIALES
+              <span className="floating-badge badge-left bg-[#FFDCF0] text-[#E6007E] border-2 border-[#E6007E] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={socialMediaIcon} alt="Icono Redes Sociales" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> REDES SOCIALES
               </span>
-              <span className="floating-badge badge-center-bottom bg-blue-300 text-blue-900 border-2 border-blue-400 px-3 py-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center gap-1.5 absolute z-10">
-                <img src={masXMenosIcon} alt="Icono Más x Menos" className="w-4 h-4 md:w-5 md:h-5 object-contain" /> MÁSxMENOS
+              <span className="floating-badge badge-center-bottom bg-[#D9F0FF] text-[#1776FF] border-2 border-[#1776FF] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={masXMenosIcon} alt="Icono Más x Menos" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> MÁSXMENOS
               </span>
-              <span className="floating-badge badge-right-top bg-purple-300 text-purple-900 border-2 border-purple-400 px-3 py-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center gap-1.5 absolute z-10">
-                <img src={datosIcon} alt="Icono Datos" className="w-4 h-4 md:w-5 md:h-5 object-contain" /> DATOS
+              <span className="floating-badge badge-right-top bg-[#DCC5FF] text-[#570C99] border-2 border-[#570C99] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={datosIcon} alt="Icono Datos" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> DATOS
               </span>
-              <span className="floating-badge badge-right bg-teal-100 text-teal-900 border-2 border-teal-300 px-3 py-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center gap-1.5 absolute z-10">
-                <img src={llamadasIcon} alt="Icono Llamadas" className="w-4 h-4 md:w-5 md:h-5 object-contain" /> LLAMADAS
+              <span className="floating-badge badge-right bg-[#A0F9DE] text-[#1E5353] border-2 border-[#1E5353] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={llamadasIcon} alt="Icono Llamadas" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> LLAMADAS
               </span>
             </div>
 
@@ -136,7 +206,7 @@ export default function Home() {
                   { id: 'snap', icon: faSnapchat },
                   { id: 'ig', icon: faInstagram }
                 ].map((app, i) => (
-                  <div key={i} className={`app-icon social-${app.id} w-8 h-8 md:w-11 md:h-11 rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-xl hover:scale-110 transition-transform cursor-pointer`}>
+                  <div key={i} className={`app-icon social-${app.id} w-8 h-8 md:w-11 md:h-11 rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-pointer`}>
                     <FontAwesomeIcon icon={app.icon} />
                   </div>
                 ))}
@@ -153,31 +223,31 @@ export default function Home() {
 /* Componente de Card separado para mantener el JSX limpio */
 function CardPlan({ plan }) {
   return (
-    <div className="card-item relative bg-[#d4d4d4] rounded-2xl flex flex-col items-center pb-10 shadow-2xl  w-full h-full">
-      {/* Imagen */}
-      <div className="w-full h-40 overflow-hidden relative">
-        <div className="absolute inset-0 bg-black/10 z-10"></div>
+    <div className="card-item relative bg-[#D9D9D9] rounded-[30px] flex flex-col items-center pb-12 shadow-2xl w-full h-full">
+      {/* Imagen con borde azul debajo y radio ajustado para no desbordar el contenedor de 30px */}
+      <div className="w-full h-40 overflow-hidden relative rounded-t-[30px] border-b-[2px] border-[#1565e8]">
+        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none"></div>
         <img src={plan.image} alt={plan.title} className="w-full h-full object-cover" />
       </div>
       {/* Contenido */}
-      <div className="text-center mt-5 px-4 w-full">
-        <p className="text-[9px] text-gray-500 font-bold tracking-widest mb-1 uppercase">Conservando tu mismo número</p>
-        <h3 className="text-lg font-black mb-3 text-gray-900">{plan.title}</h3>
-        <div className="min-h-[40px]">
+      <div className="text-center mt-6 px-4 w-full flex-grow flex flex-col">
+        <p className="text-[10px] md:text-[10px] text-black font-normal tracking-widest mb-1.5 uppercase leading-none">Conservando tu mismo número</p>
+        <h3 className="text-[24px] md:text-[34px] font-semibold text-black leading-tight mb-2">{plan.title}</h3>
+        <div className="flex flex-col gap-1 mb-4">
           {plan.lines.map((line, i) => (
-            <p key={i} className="text-xs font-semibold text-gray-700">{line}</p>
+            <p key={i} className="text-[15px] md:text-[24px] font-normal text-black leading-tight">{line}</p>
           ))}
         </div>
-        <div className="mt-4 flex flex-col items-center">
-          <div className="flex items-start tracking-tighter">
-            <span className="text-5xl font-black text-gray-900">${plan.price}</span>
-            <span className="text-sm font-bold text-gray-900 mt-1">*</span>
+        <div className="mt-auto pt-2 flex flex-col items-center">
+          <div className="flex items-start tracking-tighter justify-center leading-none">
+            <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
+            <span className="text-[18px] md:text-[24px] font-semibold text-black mt-1 leading-none">*</span>
           </div>
-          <span className="text-[10px] text-gray-500 font-bold uppercase mt-1">al mes</span>
+          <span className="text-[12px] md:text-[16px] text-black font-light mt-0 mt-2 tracking-widest leading-none ">al mes</span>
         </div>
       </div>
       {/* Botón */}
-      <button className="absolute -bottom-5 px-8 flex justify-center py-3 bg-[#b5ffd8] hover:bg-[#85f5bc] rounded-full text-[13px] font-black text-teal-900 shadow-xl transition-colors duration-300">
+      <button className="absolute -bottom-[30px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 bg-[#A0F9DE] hover:bg-[#8de8cd] rounded-full text-[16px] md:text-[20px] font-semibold text-black shadow-xl transition-colors duration-300">
         ¡LO QUIERO!
       </button>
     </div>

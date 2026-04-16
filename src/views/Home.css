@@ -18,7 +18,7 @@
 
 /* El título ocupa todo el ancho del grid y se escala verticalmente */
 .title-p-plan {
-  font-size: 160px;
+  font-size: 168px;
   transform: scaleY(1.2);
   transform-origin: center;
   display: block;
@@ -31,24 +31,24 @@
 
 /* Posiciones absolutas de los badges respecto a .title-row */
 .badge-left {
-  left: 2%;
-  top: 50%;
+  left: 0%;
+  top: 35%;
   transform: translateY(-50%);
 }
 
 .badge-center-bottom {
-  left: 38%;
+  left: 34%;
   bottom: 2%;
 }
 
 .badge-right-top {
-  right: 18%;
+  right: 23%;
   top: 10%;
 }
 
 .badge-right {
   right: 0%;
-  top: 50%;
+  top: 35%;
   transform: translateY(-50%);
 }
 
@@ -79,7 +79,7 @@
 }
 
 .social-msg {
-  background-color: #a222f7;
+  background: linear-gradient(45deg, #00B2FF 0%, #006AFF 50%, #A222F7 75%, #FF5285 100%);
   color: #ffffff;
 }
 
@@ -89,6 +89,6 @@
 }
 
 .social-ig {
-  background-color: #e1306c;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #ffffff;
 }
