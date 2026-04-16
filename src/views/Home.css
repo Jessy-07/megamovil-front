@@ -52,6 +52,27 @@
   transform: translateY(-50%);
 }
 
+/* Posiciones absolutas de los badges (Sección Plan Individual) */
+.badge-ind-social {
+  left: -3%;
+  top: 20%;
+}
+
+.badge-ind-masxmenos {
+  left: 25%;
+  bottom: -5%;
+}
+
+.badge-ind-datos {
+  right: 32%;
+  top: 40%;
+}
+
+.badge-ind-llamadas {
+  right: 4%;
+  top: 30%;
+}
+
 /* Preservar perspectiva 3D para animación de las cards */
 .preserve-3d {
   transform-style: preserve-3d;
@@ -59,36 +80,36 @@
 
 /* ── Colores de redes sociales ── */
 .social-fb {
-  background-color: #1877f2;
+  background-color: #0068FF;
   color: #ffffff;
 }
 
 .social-x {
-  background-color: #000000;
+  background-color: #0D0026;
   color: #ffffff;
 }
 
 .social-wa {
-  background-color: #25d366;
+  background-color: #00D756;
   color: #ffffff;
 }
 
 .social-tg {
-  background-color: #0088cc;
+  background-color: #0068FF;
   color: #ffffff;
 }
 
 .social-msg {
-  background: linear-gradient(45deg, #00B2FF 0%, #006AFF 50%, #A222F7 75%, #FF5285 100%);
+  background: #8E329B;
   color: #ffffff;
 }
 
 .social-snap {
-  background-color: #fffc00;
+  background-color: #FFFC00;
   color: #000000;
 }
 
 .social-ig {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: #E5087E;
   color: #ffffff;
 }

@@ -6,6 +6,7 @@ import socialMediaIcon from '../assets/icons/home/social-media-icon.png';
 import masXMenosIcon from '../assets/icons/home/masxmenos-icon.png';
 import datosIcon from '../assets/icons/home/datos-icon.png';
 import llamadasIcon from '../assets/icons/home/llamadas-icon.png';
+import promoVideo from '../assets/videos/video-megamovil.mp4';
 import './Home.css';
 
 const plans = [
@@ -29,6 +30,40 @@ const plans = [
   }
 ];
 
+const individualPlans = [
+  {
+    title: 'ESENCIAL',
+    data: '6GB',
+    dataDesc: 'para navegar',
+    price: '100',
+    socials: ['fb', 'x', 'wa', 'tg', 'msg']
+  },
+  {
+    title: 'CONECTADO',
+    data: '30GB',
+    dataDesc: 'para navegar',
+    price: '200',
+    socials: ['fb', 'x', 'wa', 'tg', 'msg']
+  },
+  {
+    title: 'ILIMITADO',
+    data: 'Datos\nIlimitados',
+    dataDesc: '',
+    price: '300',
+    socials: ['fb', 'x', 'wa', 'tg', 'msg', 'snap', 'ig']
+  }
+];
+
+const socialConfig = {
+  fb: { icon: faFacebookF, bg: 'bg-[#1877F2]', color: 'text-white' },
+  x: { icon: faXTwitter, bg: 'bg-[#000000]', color: 'text-white' },
+  wa: { icon: faWhatsapp, bg: 'bg-[#25D366]', color: 'text-white' },
+  tg: { icon: faTelegram, bg: 'bg-[#2AABEE]', color: 'text-white' },
+  msg: { icon: faFacebookMessenger, bg: 'bg-gradient-to-tr from-[#00A6FF] to-[#FF0073]', color: 'text-white' },
+  snap: { icon: faSnapchat, bg: 'bg-[#FFFC00]', color: 'text-black' },
+  ig: { icon: faInstagram, bg: 'bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF]', color: 'text-white' },
+};
+
 // Propuesta 3: Factor de escala máxima por proximidad (Efecto Lupa/Magnético)
 const BADGE_CONFIG = [
   { id: 'badge-left', maxScale: 1.25 },
@@ -39,6 +74,29 @@ const BADGE_CONFIG = [
 
 export default function Home() {
   const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+
+  // Observer para reproducir video cuando esté visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoRef.current?.play().catch(e => console.log("Auto-play prevented", e));
+        } else {
+          videoRef.current?.pause();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -133,7 +191,7 @@ export default function Home() {
 
   return (
     /* Contenedor principal de la página (fondo blanco/gris) */
-    <div className="min-h-screen bg-[#e8eff5] p-2 md:p-6 xl:p-10 flex justify-center">
+    <div className="min-h-screen bg-[#e8eff5] p-2 md:p-6 xl:p-10 flex flex-col items-center gap-6 xl:gap-10">
 
       {/* Sección principal: fondo azul con bordes redondeados, NO full-width de la ventana */}
       <section ref={sectionRef} className="relative w-[100%] overflow-hidden bg-[#1565e8] rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl">
@@ -188,11 +246,11 @@ export default function Home() {
 
             {/* ── ROW 4: Texto + Íconos de Redes Sociales ── */}
             <div className="col-span-12 flex flex-col items-center text-center pt-8 pb-4">
-              <p className="bottom-text text-white/90 text-[15px] md:text-lg font-medium leading-tight">
+              <p className="bottom-text text-white/90 text-[15px] md:text-[28px] font-thin leading-tight">
                 Todos los planes cuentan con<br />
                 Redes Sociales, Minutos y SMS
               </p>
-              <h2 className="bottom-text font-black text-white text-3xl md:text-5xl mt-1 tracking-wider">
+              <h2 className="bottom-text font-medium text-white text-3xl md:text-5xl mt-1 tracking-wider">
                 ILIMITADOS
               </h2>
 
@@ -206,7 +264,7 @@ export default function Home() {
                   { id: 'snap', icon: faSnapchat },
                   { id: 'ig', icon: faInstagram }
                 ].map((app, i) => (
-                  <div key={i} className={`app-icon social-${app.id} w-8 h-8 md:w-11 md:h-11 rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-pointer`}>
+                  <div key={i} className={`app-icon social-${app.id} w-8 h-8 md:w-[50px] md:h-[50px] rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-[30px] hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-pointer`}>
                     <FontAwesomeIcon icon={app.icon} />
                   </div>
                 ))}
@@ -216,6 +274,81 @@ export default function Home() {
           </div>{/* /grid */}
         </div>{/* /container */}
       </section>
+
+      {/* Segunda Sección: Video */}
+      <section className="relative w-[100%] h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[550px] overflow-hidden bg-[#000000] rounded-[2rem] lg:rounded-[3rem] shadow-xl flex items-center justify-center">
+        <video
+          ref={videoRef}
+          src={promoVideo}
+          className="w-full h-full object-cover pointer-events-none"
+          loop
+          muted
+          playsInline
+        />
+      </section>
+
+      {/* Tercera Sección: Plan Individual (Fondo Naranja) */}
+      <section className="relative w-[100%] overflow-hidden bg-[#ff8a00] rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl">
+
+        {/* Blobs decorativos */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="bg-blob absolute top-[-15%] left-[-5%] w-[55vw] h-[55vw] rounded-full bg-[#ffa94d] blur-[120px] opacity-60"></div>
+          <div className="bg-blob absolute bottom-[-20%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-[#e65c00] blur-[100px] opacity-70"></div>
+          <div className="bg-blob absolute top-[30%] right-[15%] w-[35vw] h-[35vw] rounded-full bg-[#ffc070] blur-[90px] opacity-50"></div>
+        </div>
+
+        <div className="relative container mx-auto px-4 max-w-[1320px]">
+          <div className="grid grid-cols-12 gap-x-4 md:gap-x-6">
+
+            <div className="col-span-12 text-center pt-2 pb-0">
+              <h3 className="text-white uppercase subtitle-p-plan">
+                DESCUBRE EL PLAN QUE SE ADAPTA A TI
+              </h3>
+            </div>
+
+            <div className="col-span-12 relative flex items-center justify-center title-row mb-12">
+              <h2 className="title-p-plan font-anton text-white uppercase text-center w-full">
+                PLAN INDIVIDUAL
+              </h2>
+
+              {/* Badges Individuales */}
+              <span className="floating-badge-ind badge-ind-social bg-[#FFDCF0] text-[#E6007E] border-2 border-[#E6007E] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={socialMediaIcon} alt="Icono Redes Sociales" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> REDES SOCIALES
+              </span>
+              <span className="floating-badge-ind badge-ind-masxmenos bg-[#D9F0FF] text-[#1776FF] border-2 border-[#1776FF] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={masXMenosIcon} alt="Icono Más x Menos" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> MÁSXMENOS
+              </span>
+              <span className="floating-badge-ind badge-ind-datos bg-[#DCC5FF] text-[#570C99] border-2 border-[#570C99] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={datosIcon} alt="Icono Datos" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> DATOS
+              </span>
+              <span className="floating-badge-ind badge-ind-llamadas bg-[#A0F9DE] text-[#1E5353] border-2 border-[#1E5353] px-3 md:px-4 py-2 rounded-full text-[11px] md:text-[16px] font-medium shadow-lg flex items-center gap-2 absolute z-10">
+                <img src={llamadasIcon} alt="Icono Llamadas" className="w-5 h-5 md:w-6 md:h-6 object-contain" /> LLAMADAS
+              </span>
+            </div>
+
+            {/* ── ROW 3: Cards ── */}
+            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8">
+              <CardPlanIndividual plan={individualPlans[0]} />
+            </div>
+            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8">
+              <CardPlanIndividual plan={individualPlans[1]} />
+            </div>
+            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8">
+              <CardPlanIndividual plan={individualPlans[2]} />
+            </div>
+
+            {/* ── ROW 4: Texto ── */}
+            <div className="col-span-12 flex flex-col items-center text-center pt-8 pb-4">
+              <h2 className="bottom-text font-medium text-white/90 text-[16px] md:text-[22px] tracking-wide uppercase">
+                TODOS NUESTROS PLANES TIENEN<br />
+                <span className="font-bold">+Minutos y SMS incluidos</span>
+              </h2>
+            </div>
+
+          </div>{/* /grid */}
+        </div>{/* /container */}
+      </section>
+
     </div>
   );
 }
@@ -243,11 +376,73 @@ function CardPlan({ plan }) {
             <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
             <span className="text-[18px] md:text-[24px] font-semibold text-black mt-1 leading-none">*</span>
           </div>
-          <span className="text-[12px] md:text-[16px] text-black font-light mt-0 mt-2 tracking-widest leading-none ">al mes</span>
+          <span className="text-[12px] md:text-[16px] text-black font-light mt-0 tracking-widest leading-none ">al mes</span>
         </div>
       </div>
       {/* Botón */}
-      <button className="absolute -bottom-[30px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 bg-[#A0F9DE] hover:bg-[#8de8cd] rounded-full text-[16px] md:text-[20px] font-semibold text-black shadow-xl transition-colors duration-300">
+      <button className="absolute -bottom-[28px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 bg-[#A0F9DE] hover:bg-[#8de8cd] rounded-full text-[16px] md:text-[20px] font-semibold text-black shadow-xl transition-colors duration-300">
+        ¡LO QUIERO!
+      </button>
+    </div>
+  );
+}
+
+/* Componente de Card para el Plan Individual (sección naranja) */
+function CardPlanIndividual({ plan }) {
+  const isMultiLineData = plan.data.includes('\n');
+
+  return (
+    <div className="card-item relative bg-[#FFE7D0] rounded-[30px] flex flex-col items-center pt-8 pb-12 shadow-2xl w-full h-full border-[3px] border-[#FF7F00]">
+
+      {/* Title */}
+      <h3 className="text-[28px] md:text-[54px] font-anton text-[#FF7F00] tracking-wider leading-none mb-3">{plan.title}</h3>
+
+      {/* Línea divisoria naranja */}
+      <div className="w-[60%] h-[1px] bg-[#FF7F00] mb-4"></div>
+
+      {/* Data */}
+      <div className="mt-0 flex flex-col items-center text-center">
+        {isMultiLineData ? (
+          <span className="text-[36px] md:text-[40px] font-semibold text-black tracking-tight whitespace-pre-line leading-[1.1] mb-2">{plan.data}</span>
+        ) : (
+          <>
+            <span className="text-[48px] md:text-[60px] font-semibold text-black tracking-tight leading-none">{plan.data}</span>
+            <span className="text-[14px] md:text-[14px] font-light text-black mt-0 leading-none">{plan.dataDesc}</span>
+          </>
+        )}
+      </div>
+
+      <div className="mt-6 flex flex-col items-center w-full px-8 relative">
+        <div className="relative w-full flex justify-center mb-1">
+          <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase">POR SOLO</span>
+        </div>
+        <div className="flex items-start tracking-tighter justify-center leading-none mt-1">
+          <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
+          <span className="text-[16px] md:text-[20px] font-bold text-black mt-1 leading-none">*</span>
+        </div>
+        <span className="text-[12px] md:text-[14px] text-black font-light mt-1 tracking-widest leading-none">al mes</span>
+      </div>
+
+      {/* Conservando numero y Redes */}
+      <div className="mt-6 text-center w-full flex-grow flex flex-col justify-end">
+        <p className="text-[10px] md:text-[12px] text-black font-medium tracking-wide mb-1.5">Conservando tu número</p>
+        <p className="text-[12px] md:text-[14px] text-black font-bold uppercase leading-tight mb-2">Redes Sociales<br />ILIMITADAS*</p>
+
+        {/* Social Icons */}
+        <div className="mt-2 flex gap-1 md:gap-2 px-2 flex-wrap justify-center bottom-4">
+          {plan.socials.map((appKey) => {
+            const app = socialConfig[appKey];
+            return (
+              <div key={appKey} className={`${app.bg} ${app.color} w-6 h-6 md:w-[30px] md:h-[30px] rounded-[6px] md:rounded-[8px] flex items-center justify-center text-[12px] md:text-[16px] shadow-sm`}>
+                <FontAwesomeIcon icon={app.icon} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Button */}
+      <button className="absolute -bottom-[24px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 bg-[#1776FF] hover:bg-[#1565e8] rounded-full text-[16px] md:text-[20px] font-semibold text-white shadow-xl transition-colors duration-300">
         ¡LO QUIERO!
       </button>
     </div>
