@@ -1,12 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faXTwitter, faWhatsapp, faTelegram, faFacebookMessenger, faSnapchat, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import Footer from '../components/Footer/Footer';
 import socialMediaIcon from '../assets/icons/home/social-media-icon.png';
 import masXMenosIcon from '../assets/icons/home/masxmenos-icon.png';
 import datosIcon from '../assets/icons/home/datos-icon.png';
 import llamadasIcon from '../assets/icons/home/llamadas-icon.png';
 import promoVideo from '../assets/videos/video-megamovil.mp4';
+import phoneImei from '../assets/img/home/phone-imei.png';
+import esimImg from '../assets/icons/home/esim.png';
+import coberturaImg from '../assets/icons/home/cobertura.png';
+import masGigasImg from '../assets/icons/home/mas-megas.png';
+import solicitaNipIcon from '../assets/icons/home/solicita-nip-icon.png';
+import asociaNipIcon from '../assets/icons/home/asocia-tu-nip.png';
+import tramiteProcesoIcon from '../assets/icons/home/tramite-en-proceso-icon.png';
+import cambioListoIcon from '../assets/icons/home/cambio-megamovil-listo.png';
 import './Home.css';
 
 const plans = [
@@ -191,13 +200,13 @@ export default function Home() {
 
   return (
     /* Contenedor principal de la página (fondo blanco/gris) */
-    <div className="min-h-screen bg-[#e8eff5] p-2 md:p-6 xl:p-10 flex flex-col items-center gap-6 xl:gap-10">
+    <div className="home-section min-h-screen bg-[#e8eff5] p-2 md:p-6 xl:p-10 flex flex-col items-center gap-6 xl:gap-10">
 
       {/* Sección principal: fondo azul con bordes redondeados, NO full-width de la ventana */}
-      <section ref={sectionRef} className="relative w-[100%] overflow-hidden bg-[#1565e8] rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl">
+      <section ref={sectionRef} className="relative w-[100%] overflow-hidden bg-[#0080ff] rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl">
 
-        {/* Blobs decorativos */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Blobs decorativos (Ocultos con 'hidden' para que GSAP los encuentre y no rompa el contenedor padre) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none hidden">
           <div className="bg-blob absolute top-[-15%] left-[-5%] w-[55vw] h-[55vw] rounded-full bg-[#3178f5] blur-[120px] opacity-60"></div>
           <div className="bg-blob absolute bottom-[-20%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-[#0847c5] blur-[100px] opacity-70"></div>
           <div className="bg-blob absolute top-[30%] right-[15%] w-[35vw] h-[35vw] rounded-full bg-[#4a8cff] blur-[90px] opacity-50"></div>
@@ -327,27 +336,249 @@ export default function Home() {
             </div>
 
             {/* ── ROW 3: Cards ── */}
-            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8">
+            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8 flex">
               <CardPlanIndividual plan={individualPlans[0]} />
             </div>
-            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8">
+            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8 flex">
               <CardPlanIndividual plan={individualPlans[1]} />
             </div>
-            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8">
+            <div className="col-span-12 md:col-span-4 preserve-3d pt-6 pb-8 flex">
               <CardPlanIndividual plan={individualPlans[2]} />
             </div>
 
             {/* ── ROW 4: Texto ── */}
             <div className="col-span-12 flex flex-col items-center text-center pt-8 pb-4">
-              <h2 className="bottom-text font-medium text-white/90 text-[16px] md:text-[22px] tracking-wide uppercase">
+              <h2 className="bottom-text font-medium text-white/90 text-[16px] md:text-[28px] tracking-wide">
                 TODOS NUESTROS PLANES TIENEN<br />
-                <span className="font-bold">+Minutos y SMS incluidos</span>
+                <span>+Minutos y SMS incluidos</span>
               </h2>
             </div>
 
           </div>{/* /grid */}
         </div>{/* /container */}
       </section>
+
+      {/* Cuarta Sección: Compatibilidad IMEI */}
+      <section className="relative w-[100%] overflow-hidden bg-[#1565e8] rounded-[2rem] lg:rounded-[3rem] py-8 md:py-14 shadow-xl">
+
+        {/* Blobs decorativos */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="bg-blob absolute top-[-20%] left-[-8%] w-[50vw] h-[50vw] rounded-full bg-[#1e5fff] blur-[130px] opacity-70"></div>
+          <div className="bg-blob absolute bottom-[-20%] right-[0%] w-[40vw] h-[40vw] rounded-full bg-[#0847c5] blur-[100px] opacity-60"></div>
+        </div>
+
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto">
+
+          {/* Título y subtítulo centrados */}
+          <h2 className="title-section font-anton text-white uppercase text-center leading-none mb-1">
+            ¿MI EQUIPO ES COMPATIBLE?
+          </h2>
+          <p className="text-white text-[13px] md:text-[28px] font-normal text-center mb-6 md:mb-10">
+            Descubre la forma para obtener el IMEI!
+          </p>
+
+          {/* Fila principal */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6  w-full">
+
+            {/* ── Card Izquierda: teléfono sobresale arriba-derecha ── */}
+            <div className="relative flex-shrink-0 w-full md:w-[360px] lg:w-[420px]">
+              {/* Card blanca */}
+              <div className="relative bg-white rounded-[1.5rem] overflow-hidden shadow-2xl px-6 pt-5 pb-6 h-[160px] md:h-[210px]">
+                {/* Texto */}
+                <div className="relative z-10 flex flex-col justify-center h-full w-[55%]">
+                  <span className="text-[10px] md:text-[18px] text-[#686868] italic font-normal leading-none mb-1">Obtén tu IMEI</span>
+                  <h3 className="font-anton text-[22px] md:text-[40px] leading-[1] text-[#111827] uppercase italic" style={{ fontStyle: 'italic' }}>
+                    SOLO MARCA
+                  </h3>
+                  <p className="text-[#001b35] leading-snug mt-5">
+                    <span className="text-[24px]">*#06#</span><br />
+                    <span className="font-normal text-[18px]">desde tu celular.</span>
+                  </p>
+                </div>
+              </div>
+
+              <img
+                src={phoneImei}
+                alt="Teléfono IMEI"
+                className="imei-phone-img"
+                style={{ transform: 'rotate(5deg)' }}
+              />
+            </div>
+
+            {/* ── Contenido Derecho ── */}
+            <div className="flex flex-col w-full items-center md:w-auto">
+              <h3 className="title-form-imei font-anton text-white uppercase leading-[1.05] mb-5 tracking-wide">
+                YA LO TIENES...INGRESALO AQUÍ
+              </h3>
+
+              {/* Barra input + botón (separados) */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[600px]">
+                <input
+                  type="text"
+                  placeholder="INGRESA AQUÍ TU IMEI"
+                  className="flex-1 w-full sm:w-auto bg-white rounded-full border-none outline-none text-gray-600 placeholder-gray-400 text-[11px] md:text-[12px] font-semibold px-6 py-3.5 uppercase tracking-wider shadow-lg text-center sm:text-left"
+                />
+                <button className="w-full sm:w-auto bg-[#A0F9DE] text-[#000] hover:bg-[#8de8cd] font-black uppercase rounded-full px-6 md:px-8 py-3 text-[12px] md:text-[16px] transition-colors shadow-lg whitespace-nowrap">
+                  VALIDA AQUÍ
+                </button>
+              </div>
+
+              <p className="text-white text-[11px] md:text-[16px] font-light mt-3">
+                Conoce nuestros planes compatibles con todos los equipos,{' '}
+                <a href="#" className="underline text-white/90 hover:text-white transition-colors">click aquí</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── Quinta Sección: Marquee de Beneficios (full-width) ── */}
+      <section className="benefits-marquee-section w-full overflow-hidden ">
+        <InfiniteMarquee speed={1}>
+          <div className="benefit-card benefit-card--blue">
+            <div className="benefit-card__text">
+              <h4 className="benefit-card__title">COBERTURA</h4>
+              <p className="benefit-card__desc">Navega y llama en todo México, EE.UU y Cánada</p>
+            </div>
+            <img src={coberturaImg} alt="Cobertura" className="benefit-card__icon" />
+
+          </div>
+          <div className="benefit-card benefit-card--lavender">
+            <div className="benefit-card__text">
+              <h4 className="benefit-card__title">eSIM</h4>
+              <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
+            </div>
+            <img src={esimImg} alt="eSIM" className="benefit-card__icon" />
+
+          </div>
+          <div className="benefit-card benefit-card--white">
+            <div className="benefit-card__text">
+              <h4 className="benefit-card__title">MÁS MEGAS</h4>
+              <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
+            </div>
+            <img src={masGigasImg} alt="Más Megas" className="benefit-card__icon" />
+          </div>
+          <div className="benefit-card benefit-card--teal">
+            <div className="benefit-card__text">
+              <h4 className="benefit-card__title">eSIM</h4>
+              <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
+            </div>
+            <img src={esimImg} alt="eSIM" className="benefit-card__icon" />
+          </div>
+        </InfiniteMarquee>
+      </section>
+
+      {/* ── Sexta Sección: Cámbiate a Mega Móvil ── */}
+      <section className="cambiate-section w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-xl">
+        <div className="relative container mx-auto max-w-[1320px] px-4 pt-14 pb-20">
+          {/* Header */}
+          <div className="text-center pb-12 px-4">
+            <h2 className="title-section font-anton text-white uppercase text-center leading-none mb-1">
+              CÁMBIATE A MEGA MÓVIL
+            </h2>
+            <p className="text-white text-[13px] md:text-[28px] font-normal text-center mb-6 md:mb-10">
+              Cambiate y conserva tu número, fácil y rápido.
+            </p>
+          </div>
+
+          {/* Cards de pasos */}
+          <div className="cambiate-cards-grid">
+
+            {/* Paso 1 */}
+            <div className="cambiate-card">
+              <span className="cambiate-badge">1</span>
+              <img src={solicitaNipIcon} alt="Solicita tu NIP" className="cambiate-card__icon" />
+              <p className="cambiate-card__text">
+                Solicita tu NIP mandando<br />un mensaje<br />al <strong>051</strong> con la palabra nip
+              </p>
+            </div>
+
+            {/* Paso 2 */}
+            <div className="cambiate-card flex flex-col justify-between">
+              <span className="cambiate-badge">2</span>
+              <div>
+                <img src={asociaNipIcon} alt="Asocia tu NIP" className="cambiate-card__icon mx-auto" />
+                <p className="cambiate-card__text mt-4">
+                  Danos tu NIP y el número<br />celular que deseas conservar
+                </p>
+              </div>
+              <div className="mt-4">
+                <a href="#" className="cambiate-btn">CÁMBIATE AQUÍ</a>
+              </div>
+            </div>
+
+            {/* Paso 3 */}
+            <div className="cambiate-card">
+              <span className="cambiate-badge">3</span>
+              <img src={tramiteProcesoIcon} alt="Trámite en proceso" className="cambiate-card__icon" />
+              <p className="cambiate-card__text">
+                Tu trámite está en proceso<br />y tomará de 24 a 48 horas.
+              </p>
+            </div>
+
+            {/* Paso 4 */}
+            <div className="cambiate-card">
+              <span className="cambiate-badge">4</span>
+              <img src={cambioListoIcon} alt="Cambio listo" className="cambiate-card__icon" />
+              <p className="cambiate-card__text">
+                Una vez que te<br />quedes sin señal es hora de<br />insertar tu chip<br />Mega Móvil.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── Séptima Sección: Quiero contratar Megamóvil ── */}
+      <section className="contratar-section w-full rounded-[2rem] lg:rounded-[3rem] mb-10">
+        <div className="relative container mx-auto max-w-[1320px] px-4">
+
+          {/* Pills flotantes — lado izquierdo */}
+          <div className="contratar-pill contratar-pill--llamadas">
+            <img src={llamadasIcon} alt="" className="contratar-pill__icon" />
+            <span>LLAMADAS</span>
+          </div>
+          <div className="contratar-pill contratar-pill--facebook">
+            <FontAwesomeIcon icon={faFacebookF} className="contratar-pill__icon" />
+            <span>FACEBOOK</span>
+          </div>
+          <div className="contratar-pill contratar-pill--datos">
+            <img src={datosIcon} alt="" className="contratar-pill__icon text-purple-700" />
+            <span>DATOS</span>
+          </div>
+
+          {/* Pills flotantes — lado derecho */}
+          <div className="contratar-pill contratar-pill--whatsapp">
+            <FontAwesomeIcon icon={faWhatsapp} className="contratar-pill__icon" />
+            <span>WHATSAPP</span>
+          </div>
+          <div className="contratar-pill contratar-pill--masxmenos">
+            <img src={masXMenosIcon} alt="" className="contratar-pill__icon" />
+            <span>MÁSXMENOS</span>
+          </div>
+          <div className="contratar-pill contratar-pill--redes">
+            <img src={socialMediaIcon} alt="" className="contratar-pill__icon" />
+            <span>REDES SOCIALES</span>
+          </div>
+
+          {/* Contenido central */}
+          <div className="contratar-center">
+            <h2 className="title-section font-anton uppercase text-center leading-none mb-1">Quiero contratar Mega móvil</h2>
+            <div className="contratar-form mt-4">
+              <input
+                type="tel"
+                className="contratar-input shadow-sm"
+                placeholder=""
+              />
+              <button className="contratar-cta font-bold">LLAMAME</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Octava Sección: Footer ── */}
+      <Footer />
 
     </div>
   );
@@ -392,48 +623,45 @@ function CardPlanIndividual({ plan }) {
   const isMultiLineData = plan.data.includes('\n');
 
   return (
-    <div className="card-item relative bg-[#FFE7D0] rounded-[30px] flex flex-col items-center pt-8 pb-12 shadow-2xl w-full h-full border-[3px] border-[#FF7F00]">
+    <div className="card-item relative bg-[#FFE7D0] rounded-[30px] flex flex-col items-center pt-8 pb-14 shadow-2xl w-full h-full border-[3px] border-[#FF7F00]">
 
-      {/* Title */}
-      <h3 className="text-[28px] md:text-[54px] font-anton text-[#FF7F00] tracking-wider leading-none mb-3">{plan.title}</h3>
+      {/* ── ZONA 1: Título ── */}
+      <div className="flex flex-col items-center w-full px-4 pb-3">
+        <h3 className="text-[28px] md:text-[54px] font-anton text-[#FF7F00] tracking-wider leading-none">{plan.title}</h3>
+        <div className="w-[60%] h-[1px] bg-[#FF7F00] mt-3"></div>
+      </div>
 
-      {/* Línea divisoria naranja */}
-      <div className="w-[60%] h-[1px] bg-[#FF7F00] mb-4"></div>
-
-      {/* Data */}
-      <div className="mt-0 flex flex-col items-center text-center">
+      {/* ── ZONA 2: Gigas (flex-1, alineado al centro vertical) ── */}
+      <div className="flex flex-1 flex-col items-center justify-center text-center px-4">
         {isMultiLineData ? (
-          <span className="text-[36px] md:text-[40px] font-semibold text-black tracking-tight whitespace-pre-line leading-[1.1] mb-2">{plan.data}</span>
+          <span className="text-[36px] md:text-[40px] font-semibold text-black tracking-tight whitespace-pre-line leading-[1.1]">{plan.data}</span>
         ) : (
           <>
             <span className="text-[48px] md:text-[60px] font-semibold text-black tracking-tight leading-none">{plan.data}</span>
-            <span className="text-[14px] md:text-[14px] font-light text-black mt-0 leading-none">{plan.dataDesc}</span>
+            <span className="text-[13px] md:text-[14px] font-light text-black leading-none mt-0.5">{plan.dataDesc}</span>
           </>
         )}
       </div>
 
-      <div className="mt-6 flex flex-col items-center w-full px-8 relative">
-        <div className="relative w-full flex justify-center mb-1">
-          <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase">POR SOLO</span>
-        </div>
-        <div className="flex items-start tracking-tighter justify-center leading-none mt-1">
+      {/* ── ZONA 3: Precio (siempre alineado al mismo nivel) ── */}
+      <div className="flex flex-col items-center w-full px-8 pt-4 pb-4">
+        <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
+        <div className="flex items-start tracking-tighter justify-center leading-none">
           <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
           <span className="text-[16px] md:text-[20px] font-bold text-black mt-1 leading-none">*</span>
         </div>
-        <span className="text-[12px] md:text-[14px] text-black font-light mt-1 tracking-widest leading-none">al mes</span>
+        <span className="text-[12px] md:text-[14px] text-black font-light mt-0.5 tracking-widest leading-none">al mes</span>
       </div>
 
-      {/* Conservando numero y Redes */}
-      <div className="mt-6 text-center w-full flex-grow flex flex-col justify-end">
-        <p className="text-[10px] md:text-[12px] text-black font-medium tracking-wide mb-1.5">Conservando tu número</p>
-        <p className="text-[12px] md:text-[14px] text-black font-bold uppercase leading-tight mb-2">Redes Sociales<br />ILIMITADAS*</p>
-
-        {/* Social Icons */}
-        <div className="mt-2 flex gap-1 md:gap-2 px-2 flex-wrap justify-center bottom-4">
+      {/* ── ZONA 4: Redes ilimitadas + íconos ── */}
+      <div className="flex flex-col items-center text-center w-full px-4 pt-2 pb-2">
+        <p className="text-[10px] md:text-[11px] text-black tracking-wide mb-3">Conservando tu número</p>
+        <p className="text-[12px] md:text-[14px] text-black leading-tight mb-2">Redes Sociales<br /><b>ILIMITADAS<sup>*</sup></b></p>
+        <div className="flex gap-1 md:gap-2 flex-wrap justify-center">
           {plan.socials.map((appKey) => {
             const app = socialConfig[appKey];
             return (
-              <div key={appKey} className={`${app.bg} ${app.color} w-6 h-6 md:w-[30px] md:h-[30px] rounded-[6px] md:rounded-[8px] flex items-center justify-center text-[12px] md:text-[16px] shadow-sm`}>
+              <div key={appKey} className={`social-${appKey} w-6 h-6 md:w-[45px] md:h-[45px] rounded-[6px] md:rounded-[10px] flex items-center justify-center text-[12px] md:text-[24px] shadow-sm`}>
                 <FontAwesomeIcon icon={app.icon} />
               </div>
             );
@@ -448,3 +676,174 @@ function CardPlanIndividual({ plan }) {
     </div>
   );
 }
+
+/* ── Marquee Infinito con Drag ──
+   - Mide el ancho de 1 set de cards y calcula copias dinámicamente.
+   - Anima con requestAnimationFrame (translate3d, GPU).
+   - Soporta drag con el mouse (pointer events) con momentum.
+   - Wrap seamless: el offset siempre se mantiene en [-setWidth, 0). */
+function InfiniteMarquee({ children, speed = 0.5 }) {
+  const wrapperRef = useRef(null);
+  const trackRef = useRef(null);
+  const [copies, setCopies] = useState(3);
+  const childArray = React.Children.toArray(children);
+
+  // Refs para el estado de animación (no provocan re-render)
+  const anim = useRef({
+    offset: 0,
+    velocity: 0,
+    isDragging: false,
+    isHovered: false,
+    dragStartX: 0,
+    dragStartOffset: 0,
+    lastX: 0,
+    lastTime: 0,
+    setWidth: 0,
+  });
+
+  // 1. Medir el ancho de 1 set y calcular copias necesarias
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const measure = () => {
+      const group = track.querySelector('[data-g="0"]');
+      if (!group) return;
+      const w = group.scrollWidth;
+      anim.current.setWidth = w;
+      const needed = Math.ceil(window.innerWidth / w) + 2;
+      setCopies(prev => {
+        const next = Math.max(3, needed);
+        return next !== prev ? next : prev;
+      });
+    };
+
+    // Esperar a que las imágenes carguen para medir bien
+    const waitAndMeasure = () => {
+      const imgs = track.querySelectorAll('img');
+      if (imgs.length === 0) { measure(); return; }
+      let count = 0;
+      const check = () => { count++; if (count >= imgs.length) measure(); };
+      imgs.forEach(img => {
+        if (img.complete) check();
+        else img.addEventListener('load', check, { once: true });
+      });
+    };
+
+    requestAnimationFrame(waitAndMeasure);
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [copies]);
+
+  // 2. Loop de animación (rAF)
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const a = anim.current;
+    let raf;
+
+    const loop = () => {
+      const sw = a.setWidth;
+      if (sw > 0) {
+        if (!a.isDragging && !a.isHovered) {
+          // Auto-scroll
+          a.offset -= speed;
+
+          // Momentum del drag
+          if (Math.abs(a.velocity) > 0.05) {
+            a.offset += a.velocity;
+            a.velocity *= 0.94;
+          } else {
+            a.velocity = 0;
+          }
+        }
+
+        // Wrap seamless: mantener offset en [-setWidth, 0)
+        while (a.offset <= -sw) a.offset += sw;
+        while (a.offset > 0) a.offset -= sw;
+
+        track.style.transform = `translate3d(${a.offset}px, 0, 0)`;
+      }
+      raf = requestAnimationFrame(loop);
+    };
+
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, [speed, copies]);
+
+  // 3. Drag handlers (pointer events)
+  const onDown = useCallback((e) => {
+    const a = anim.current;
+    a.isDragging = true;
+    a.velocity = 0;
+    a.dragStartX = e.clientX;
+    a.dragStartOffset = a.offset;
+    a.lastX = e.clientX;
+    a.lastTime = performance.now();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    if (wrapperRef.current) wrapperRef.current.style.cursor = 'grabbing';
+  }, []);
+
+  const onMove = useCallback((e) => {
+    const a = anim.current;
+    if (!a.isDragging) return;
+    const dx = e.clientX - a.dragStartX;
+    a.offset = a.dragStartOffset + dx;
+
+    // Calcular velocidad para el momentum
+    const now = performance.now();
+    const dt = now - a.lastTime;
+    if (dt > 0) {
+      a.velocity = ((e.clientX - a.lastX) / dt) * 16;
+    }
+    a.lastX = e.clientX;
+    a.lastTime = now;
+  }, []);
+
+  const onUp = useCallback(() => {
+    anim.current.isDragging = false;
+    if (wrapperRef.current) wrapperRef.current.style.cursor = 'grab';
+  }, []);
+
+  // 4. Pausar al hacer hover en una card (mouseenter/mouseleave nativos, no burbujean)
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const onCardEnter = () => { anim.current.isHovered = true; };
+    const onCardLeave = () => { anim.current.isHovered = false; };
+
+    const cards = wrapper.querySelectorAll('.benefit-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', onCardEnter);
+      card.addEventListener('mouseleave', onCardLeave);
+    });
+
+    return () => {
+      cards.forEach(card => {
+        card.removeEventListener('mouseenter', onCardEnter);
+        card.removeEventListener('mouseleave', onCardLeave);
+      });
+    };
+  }, [copies]);
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="marquee-wrapper"
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerLeave={() => { onUp(); anim.current.isHovered = false; }}
+    >
+      <div ref={trackRef} className="marquee-track">
+        {Array.from({ length: copies }, (_, i) => (
+          <div key={i} data-g={i} className="marquee-group" aria-hidden={i > 0}>
+            {childArray}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
