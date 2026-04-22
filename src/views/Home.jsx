@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import PlanSlider from '../components/PlanSlider/PlanSlider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faXTwitter, faWhatsapp, faTelegram, faFacebookMessenger, faSnapchat, faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -73,8 +76,10 @@ const socialConfig = {
   ig: { icon: faInstagram },
 };
 
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const mainRef = useRef(null);
   const videoRef = useRef(null);
 
   /* ── Observer: reproducir video cuando esté visible ── */
@@ -94,13 +99,85 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  /* ── Animaciones GSAP ── */
+  useGSAP(() => {
+    // 1. Animación del Hero / Plan Familiar
+    gsap.from('.subtitle-p-plan', {
+      duration: 1, y: -50, opacity: 0, ease: 'power3.out', delay: 0.2
+    });
+    gsap.from('.title-p-plan', {
+      duration: 1, scale: 0.8, opacity: 0, ease: 'back.out(1.7)', delay: 0.3
+    });
+    gsap.from('.badge-left, .badge-center-bottom, .badge-right-top, .badge-right', {
+      duration: 0.8, scale: 0, opacity: 0, stagger: 0.15, ease: 'back.out(2)', delay: 0.6, clearProps: 'all'
+    });
+    gsap.from('.plan-familiar-card', {
+      scrollTrigger: { trigger: '.plan-familiar-section', start: 'top 70%' },
+      duration: 1, y: 100, opacity: 0, stagger: 0.2, ease: 'power4.out'
+    });
+
+    // 2. Animación Social Icons Hero
+    gsap.from('.social-icon-hero', {
+      scrollTrigger: { trigger: '.social-icon-container', start: 'top 85%' },
+      duration: 0.6, scale: 0, opacity: 0, stagger: 0.05, ease: 'back.out(1.5)', clearProps: 'all'
+    });
+
+    // 3. Plan Individual
+    gsap.from('.plan-ind-title-col', {
+      scrollTrigger: { trigger: '.plan-ind-section', start: 'top 75%' },
+      duration: 0.8, y: 50, opacity: 0, ease: 'power3.out'
+    });
+    gsap.from('.badge-ind-social, .badge-ind-masxmenos, .badge-ind-datos, .badge-ind-llamadas', {
+      scrollTrigger: { trigger: '.plan-ind-section', start: 'top 70%' },
+      duration: 0.8, scale: 0, opacity: 0, stagger: 0.15, ease: 'back.out(2)', clearProps: 'all'
+    });
+    gsap.from('.plan-ind-card', {
+      scrollTrigger: { trigger: '.plan-ind-cards-container', start: 'top 75%' },
+      duration: 1, y: 100, opacity: 0, rotationY: 15, stagger: 0.2, ease: 'power4.out', transformOrigin: 'left center'
+    });
+
+    // 4. IMEI Section
+    const tlImei = gsap.timeline({
+      scrollTrigger: { trigger: '.imei-section', start: 'top 70%' }
+    });
+    tlImei.from('.imei-phone-img', { opacity: 0, duration: 1, ease: 'power3.out' })
+      .from('.imei-card-box', { x: 50, y: 50, opacity: 0, rotation: 5, duration: 1, ease: 'back.out(1.5)', clearProps: 'all' }, '-=0.8')
+      .from('.title-form-imei, .imei-input-box', { y: 30, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power2.out', clearProps: 'all' }, '-=0.5');
+
+    gsap.to('.imei-phone-img-inner', {
+      y: 8,
+      rotation: "-=1",
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    // 5. Cámbiate a Mega Móvil
+    gsap.from('.cambiate-card', {
+      scrollTrigger: { trigger: '.cambiate-cards-grid', start: 'top 80%' },
+      duration: 0.8, y: 50, opacity: 0, stagger: 0.15, ease: 'back.out(1.2)', clearProps: 'all'
+    });
+
+    // 6. Contratar Section (Pills implosionando)
+    gsap.from('.contratar-pill', {
+      scrollTrigger: { trigger: '.contratar-section', start: 'top 75%' },
+      duration: 1, scale: 0, opacity: 0, x: () => gsap.utils.random(-200, 200), y: () => gsap.utils.random(-200, 200), rotation: () => gsap.utils.random(-90, 90), stagger: 0.1, ease: 'back.out(1.2)'
+    });
+    gsap.from('.contratar-center', {
+      scrollTrigger: { trigger: '.contratar-section', start: 'top 80%' },
+      duration: 1, scale: 0.8, opacity: 0, ease: 'power3.out', delay: 0.2
+    });
+
+  }, { scope: mainRef });
+
   return (
     /* Contenedor principal de la página */
-    <div className="home-section min-h-screen p-2 md:p-6 xl:p-10 flex flex-col items-center gap-6 xl:gap-10">
+    <div ref={mainRef} className="home-section min-h-screen p-2 md:p-6 xl:p-10 flex flex-col items-center gap-6 xl:gap-10">
 
       {/* ── Sección 1: Plan Familiar (fondo azul) ── */}
       <section
-        className="relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl"
+        className="plan-familiar-section relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl"
         style={{ backgroundColor: 'var(--color-blue-primary)' }}
       >
 
@@ -143,13 +220,13 @@ export default function Home() {
               {/* ── Desktop: grid normal ── */}
               <div className="hidden lg:grid grid-cols-3 gap-x-4 md:gap-x-6">
                 {plans.map((plan, i) => (
-                  <div key={i} className="preserve-3d pb-8"><CardPlan plan={plan} /></div>
+                  <div key={i} className="plan-familiar-card preserve-3d pb-8"><CardPlan plan={plan} /></div>
                 ))}
               </div>
               {/* ── Mobile / Tablet: Slider ── */}
               <PlanSlider>
                 {plans.map((plan, i) => (
-                  <div key={i} className="preserve-3d pb-10"><CardPlan plan={plan} /></div>
+                  <div key={i} className="plan-familiar-card preserve-3d pb-10"><CardPlan plan={plan} /></div>
                 ))}
               </PlanSlider>
             </div>
@@ -164,7 +241,7 @@ export default function Home() {
                 ILIMITADOS
               </h2>
 
-              <div className="flex gap-2 md:gap-3 mt-4">
+              <div className="flex gap-2 md:gap-3 mt-4 social-icon-container">
                 {[
                   { id: 'fb', icon: faFacebookF },
                   { id: 'x', icon: faXTwitter },
@@ -176,7 +253,7 @@ export default function Home() {
                 ].map((app, i) => (
                   <div
                     key={i}
-                    className={`app-icon social-${app.id} w-8 h-8 md:w-[50px] md:h-[50px] rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-[30px] hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-pointer`}
+                    className={`social-icon-hero app-icon social-${app.id} w-8 h-8 md:w-[50px] md:h-[50px] rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-[30px]`}
                   >
                     <FontAwesomeIcon icon={app.icon} />
                   </div>
@@ -200,7 +277,7 @@ export default function Home() {
 
       {/* ── Sección 3: Plan Individual (fondo naranja) ── */}
       <section
-        className="relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl"
+        className="plan-ind-section relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl"
         style={{ backgroundColor: 'var(--color-orange-primary)' }}
       >
 
@@ -208,14 +285,14 @@ export default function Home() {
           <div className="grid grid-cols-12 gap-x-4 md:gap-x-6">
 
             {/* Subtítulo */}
-            <div className="col-span-12 text-center pt-2 pb-0">
+            <div className="plan-ind-title-col col-span-12 text-center pt-2 pb-0">
               <h3 className="text-white uppercase subtitle-p-plan">
                 DESCUBRE EL PLAN QUE SE ADAPTA A TI
               </h3>
             </div>
 
             {/* Título + Badges */}
-            <div className="col-span-12 relative flex items-center justify-center title-row mb-12">
+            <div className="plan-ind-title-col col-span-12 relative flex items-center justify-center title-row mb-12">
               <h2 className="title-p-plan font-anton text-white uppercase text-center w-full">
                 PLAN INDIVIDUAL
               </h2>
@@ -239,17 +316,17 @@ export default function Home() {
             </div>
 
             {/* Cards Plan Individual: slider en <1024px, grid en >=1024px */}
-            <div className="col-span-12 pt-6 pb-10">
+            <div className="plan-ind-cards-container col-span-12 pt-6 pb-10">
               {/* ── Desktop: grid normal ── */}
               <div className="hidden lg:grid grid-cols-3 gap-x-4 md:gap-x-6">
                 {individualPlans.map((plan, i) => (
-                  <div key={i} className="preserve-3d pb-8 flex"><CardPlanIndividual plan={plan} /></div>
+                  <div key={i} className="plan-ind-card preserve-3d pb-8 flex"><CardPlanIndividual plan={plan} /></div>
                 ))}
               </div>
               {/* ── Mobile / Tablet: Slider ── */}
               <PlanSlider>
                 {individualPlans.map((plan, i) => (
-                  <div key={i} className="preserve-3d pb-10 flex"><CardPlanIndividual plan={plan} /></div>
+                  <div key={i} className="plan-ind-card preserve-3d pb-10 flex"><CardPlanIndividual plan={plan} /></div>
                 ))}
               </PlanSlider>
             </div>
@@ -268,7 +345,7 @@ export default function Home() {
 
       {/* ── Sección 4: Compatibilidad IMEI ── */}
       <section
-        className="relative w-full p-5 2xl:px-0 overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-8 md:py-14 shadow-xl"
+        className="imei-section relative w-full p-5 2xl:px-0 overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-8 md:py-14 shadow-xl"
         style={{ backgroundColor: 'var(--color-blue-mid)' }}
       >
 
@@ -284,7 +361,7 @@ export default function Home() {
 
             {/* Card izquierda: teléfono IMEI */}
             <div className="relative flex-shrink-0 w-full md:w-[260px] lg:w-[420px]">
-              <div className="relative bg-white rounded-[1.5rem] overflow-hidden shadow-2xl px-6 pt-5 pb-6 h-[260px] md:h-[280px] lg:h-[220px]">
+              <div className="imei-card-box relative bg-white rounded-[1.5rem] overflow-hidden shadow-2xl px-6 pt-5 pb-6 h-[260px] md:h-[280px] lg:h-[220px]">
                 <div className="relative z-10 flex flex-col justify-end lg:justify-center h-full text-center lg:text-left w-[100%] lg:w-[65%] lg:w-[55%]">
                   <span className="text-[16px] md:text-[18px] italic font-normal leading-none mb-1" style={{ color: 'var(--color-gray-text)' }}>
                     Obtén tu IMEI
@@ -299,7 +376,9 @@ export default function Home() {
                 </div>
               </div>
 
-              <img src={phoneImei} alt="Teléfono IMEI" className="imei-phone-img" />
+              <div className="imei-phone-img">
+                <img src={phoneImei} alt="Teléfono IMEI" className="imei-phone-img-inner" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              </div>
             </div>
 
             {/* Contenido derecho: formulario */}
@@ -308,7 +387,7 @@ export default function Home() {
                 YA LO TIENES... INGRESALO AQUÍ
               </h3>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[600px]">
+              <div className="imei-input-box flex flex-col sm:flex-row items-center gap-3 w-full max-w-[600px]">
                 <input
                   type="text"
                   placeholder="INGRESA AQUÍ TU IMEI"
