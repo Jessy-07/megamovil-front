@@ -1,13 +1,55 @@
 /* ============================================
    Home.css — Estilos específicos de la vista Home
+   Usa variables globales definidas en index.css (:root)
    ============================================ */
 
-/* ── ROW 2: Título + fila de badges ── */
-/* Le damos suficiente altura para que el título estirado no choque con
-   la fila de arriba ni con las cards. El transform CSS no ocupa espacio real. */
+/* ── Variables locales del componente Home ── */
+/* (extienden el sistema global; solo úsalas dentro de Home) */
+.home-section {
+  /* Blob colores sección familiar (azul) */
+  --blob-blue-1: #3178f5;
+  --blob-blue-2: #0847c5;
+  --blob-blue-3: #4a8cff;
+
+  /* Blob colores sección naranja */
+  --blob-orange-1: #ffa94d;
+  --blob-orange-2: #e65c00;
+  --blob-orange-3: #ffc070;
+
+  /* Blob colores sección IMEI */
+  --blob-imei-1: #1e5fff;
+  --blob-imei-2: #0847c5;
+
+  /* Card plan familiar */
+  --card-familiar-bg: #D9D9D9;
+  --card-familiar-border: var(--color-blue-mid);
+  --card-familiar-btn-bg: var(--color-badge-teal-bg);
+  --card-familiar-btn-hover: #8de8cd;
+
+  /* Card plan individual */
+  --card-ind-bg: #FFE7D0;
+  --card-ind-border: var(--color-orange-brand);
+  --card-ind-btn-bg: var(--color-blue-cta);
+  --card-ind-btn-hover: var(--color-blue-mid);
+
+  /* Sección IMEI */
+  --imei-text-muted: var(--color-gray-text);
+  --imei-code-color: var(--color-bg-page-dark);
+
+  /* Sección contratar */
+  --contratar-bg: var(--color-gray-light);
+}
+
+/* ─── Fondo general de la página ───────────────────────── */
+.home-section {
+  background: linear-gradient(var(--color-bg-page) 65%, var(--color-bg-page-dark) 75%);
+}
+
+/* ── ROW 2: Título + fila de badges ──────────────────────
+   Le damos suficiente altura para que el título estirado no
+   choque con la fila de arriba ni con las cards.            */
 .title-row {
   height: 8rem;
-  /* altura real del contenedor */
 }
 
 @media (min-width: 768px) {
@@ -16,14 +58,9 @@
   }
 }
 
-.home-section {
-  background: linear-gradient(#e1f0ff 65%, #001b35 75%);
-}
-
-
 /* El título ocupa todo el ancho del grid y se escala verticalmente */
 .title-p-plan {
-  font-size: 168px;
+  font-size: clamp(4.5rem, 2.3182rem + 10.9091vw, 10.5rem);
   transform: scaleY(1.2);
   transform-origin: center;
   display: block;
@@ -31,10 +68,17 @@
 }
 
 .subtitle-p-plan {
-  font-size: 32px;
+  font-size: clamp(1.5rem, 1.273rem + 1.1348vw, 2rem);
+  margin-bottom: 48px;
 }
 
-/* Posiciones absolutas de los badges respecto a .title-row */
+@media (min-width: 768px) {
+  .subtitle-p-plan {
+    margin-bottom: 0;
+  }
+}
+
+/* ── Posiciones absolutas: badges Plan Familiar ────────── */
 .badge-left {
   left: 0%;
   top: 35%;
@@ -57,7 +101,7 @@
   transform: translateY(-50%);
 }
 
-/* Posiciones absolutas de los badges (Sección Plan Individual) */
+/* ── Posiciones absolutas: badges Plan Individual ──────── */
 .badge-ind-social {
   left: -3%;
   top: 20%;
@@ -78,71 +122,136 @@
   top: 30%;
 }
 
-/* Preservar perspectiva 3D para animación de las cards */
+/* ── Estilos compartidos de badge ────────────────────────
+   Color/fondo aplicados directamente en JSX con clases
+   semánticas de badge. Aquí solo el layout flotante.       */
+.floating-badge,
+.floating-badge-ind {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border-width: 2px;
+  border-style: solid;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: absolute;
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 768px) {
+
+  .floating-badge,
+  .floating-badge-ind {
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+  }
+}
+
+/* ── Variantes de color de badges ── */
+.badge--social {
+  background-color: var(--color-badge-social-bg);
+  color: var(--color-badge-social-txt);
+  border-color: var(--color-badge-social-txt);
+}
+
+.badge--masxmenos {
+  background-color: var(--color-badge-blue-bg);
+  color: var(--color-badge-blue-txt);
+  border-color: var(--color-badge-blue-txt);
+}
+
+.badge--datos {
+  background-color: var(--color-badge-datos-bg);
+  color: var(--color-badge-datos-txt);
+  border-color: var(--color-badge-datos-bdr);
+}
+
+.badge--llamadas {
+  background-color: var(--color-badge-teal-bg);
+  color: var(--color-badge-teal-txt);
+  border-color: var(--color-badge-teal-bdr);
+}
+
+/* ── Preservar perspectiva 3D para animación de las cards ── */
 .preserve-3d {
   transform-style: preserve-3d;
 }
 
-/* ── Colores de redes sociales ── */
+/* ── Colores de redes sociales ─────────────────────────── */
 .social-fb {
-  background-color: #0068FF;
-  color: #ffffff;
+  background-color: var(--social-fb-bg);
+  color: var(--social-fb-color);
 }
 
 .social-x {
-  background-color: #0D0026;
-  color: #ffffff;
+  background-color: var(--social-x-bg);
+  color: var(--social-x-color);
 }
 
 .social-wa {
-  background-color: #00D756;
-  color: #ffffff;
+  background-color: var(--social-wa-bg);
+  color: var(--social-wa-color);
 }
 
 .social-tg {
-  background-color: #0068FF;
-  color: #ffffff;
+  background-color: var(--social-tg-bg);
+  color: var(--social-tg-color);
 }
 
 .social-msg {
-  background: #8E329B;
-  color: #ffffff;
+  background-color: var(--social-msg-bg);
+  color: var(--social-msg-color);
 }
 
 .social-snap {
-  background-color: #FFFC00;
-  color: #000000;
+  background-color: var(--social-snap-bg);
+  color: var(--social-snap-color);
 }
 
 .social-ig {
-  background: #E5087E;
-  color: #ffffff;
+  background-color: var(--social-ig-bg);
+  color: var(--social-ig-color);
 }
 
+/* ── Imagen IMEI ─────────────────────────────────────────── */
 .imei-phone-img {
   position: absolute;
   right: -80px;
   top: 30px;
   width: 240px;
+  transform: rotate(5deg);
 }
 
+/* ── Botón validar IMEI ──────────────────────────────────── */
+.imei-validate-btn {
+  background-color: var(--color-badge-teal-bg);
+  color: var(--color-black);
+  transition: background-color var(--transition-btn);
+}
+
+.imei-validate-btn:hover {
+  background-color: #8de8cd;
+}
+
+/* ── Títulos de sección ──────────────────────────────────── */
 .title-section {
-  font-size: 56px;
+  font-size: clamp(2.5rem, 1.5rem + 4vw, 3.5rem);
 }
 
 .title-form-imei {
-  font-size: 48px;
+  font-size: clamp(1.75rem, 1rem + 3.5vw, 3rem);
 }
 
 /* ─── Marquee de Beneficios ─────────────────────────────── */
-
 .benefits-marquee-section {
   background: transparent;
   margin-left: -8px;
   margin-right: -8px;
   width: calc(100% + 16px);
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
 }
 
 @media (min-width: 768px) {
@@ -167,7 +276,6 @@
   -webkit-user-select: none;
   touch-action: pan-y;
   padding: 30px;
-  /* Espacio extra abajo (40px) para que la sombra alcance a renderizarse sin cortarse */
 }
 
 .marquee-wrapper:active {
@@ -186,20 +294,20 @@
   padding-right: 16px;
 }
 
-/* ── Card base ── */
+/* ── Card base del marquee ── */
 .benefit-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  border-radius: 48px;
+  border-radius: var(--radius-2xl);
   padding: 24px 28px;
   width: 450px;
   min-height: 250px;
   flex-shrink: 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+  box-shadow: var(--shadow-md);
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform var(--transition-card), box-shadow var(--transition-card);
 }
 
 .benefit-card:hover {
@@ -207,26 +315,25 @@
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
 }
 
-/* ── Variantes de color ── */
+/* ── Variantes de color del marquee ── */
 .benefit-card--blue {
-  background-color: #1776FF;
-  color: #ffffff;
+  background-color: var(--benefit-blue-bg);
+  color: var(--color-white);
 }
 
 .benefit-card--lavender {
-  background-color: #D9CCFF;
+  background-color: var(--benefit-lavender-bg);
 }
 
 .benefit-card--white {
-  background-color: #ffffff;
+  background-color: var(--benefit-white-bg);
 }
 
 .benefit-card--teal {
-  background-color: #A0F9DE;
-
+  background-color: var(--benefit-teal-bg);
 }
 
-/* ── Contenido de texto ── */
+/* ── Contenido de texto del marquee ── */
 .benefit-card__text {
   display: flex;
   flex-direction: column;
@@ -250,28 +357,24 @@
   opacity: 0.88;
 }
 
-/* ── Icono ── */
 .benefit-card__icon {
   width: 90px;
   object-fit: contain;
   flex-shrink: 0;
   align-self: flex-end;
-  /* Asegurarse de que el ícono esté abajo de su flexbox contenedor */
 }
 
 /* ─── Sección Cámbiate a Mega Móvil ─────────────────────── */
 .cambiate-section {
   position: relative;
-  background-color: #FF6600;
-  /* Simulating fluid waves with radial gradients similar to the image */
+  background-color: var(--cambiate-bg);
   background-image:
     radial-gradient(ellipse 90% 100% at 10% 90%, #FF851B 0%, transparent 50%),
     radial-gradient(ellipse 100% 100% at 80% -10%, #FF5500 0%, transparent 60%);
   overflow: hidden;
-  margin-top: 0;
 }
 
-/* Grid de las 4 cards */
+/* Grid de los 4 pasos */
 .cambiate-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -294,37 +397,35 @@
   }
 }
 
-/* Card individual */
+/* Card individual de paso */
 .cambiate-card {
   position: relative;
-  background: #ffffff;
-  border-radius: 20px;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
   padding: 40px 24px 30px;
-  /* Mas padding superior para separar del icono */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-card), box-shadow var(--transition-card);
 }
 
 .cambiate-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  box-shadow: var(--shadow-xl);
 }
 
-/* Badge numérico azul */
+/* Badge numérico */
 .cambiate-badge {
   position: absolute;
   top: -20px;
   right: -16px;
   width: 48px;
   height: 48px;
-  background: #2563EB;
-  /* Azul vibrante estilo la imagen */
-  color: #ffffff;
+  background: var(--cambiate-badge-bg);
+  color: var(--color-white);
   font-weight: 700;
   font-size: 24px;
   border-radius: 50%;
@@ -334,58 +435,55 @@
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
 }
 
-/* Icono de cada paso */
 .cambiate-card__icon {
   width: 120px;
   object-fit: contain;
 }
 
-/* Texto descriptivo */
 .cambiate-card__text {
   font-size: 20px;
   font-weight: 400;
-  color: #333333;
+  color: var(--color-text-soft);
   line-height: 1.5;
 }
 
 .cambiate-card__text strong {
   font-weight: 700;
-  color: #111111;
+  color: var(--color-text-dark);
 }
 
 /* Botón CÁMBIATE AQUÍ (solo en card 2) */
 .cambiate-btn {
   display: inline-block;
-  background-color: #2B67FF;
-  color: #ffffff;
+  background-color: var(--color-blue-link);
+  color: var(--color-white);
   font-size: 16px;
   font-weight: 300;
   text-decoration: underline;
   padding: 10px 24px;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .cambiate-btn:hover {
-  background-color: #1d4ed8;
+  background-color: var(--color-blue-dark);
   transform: translateY(-2px);
 }
 
-/* ─── Sección: Quiero contratar Megamóvil ──────────────────── */
+/* ─── Sección: Quiero contratar Megamóvil ──────────────── */
 .contratar-section {
   position: relative;
-  background: #f4f4f5;
-  /* Gris clarito limpio */
+  background: var(--contratar-bg);
   padding: 60px 0;
   min-height: 424px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 /* ── Pills flotantes ── */
@@ -395,7 +493,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -410,10 +508,9 @@
   flex-shrink: 0;
 }
 
-/* Posiciones y colores exactos de cada pill según el diseño */
+/* Posiciones y colores de cada pill */
 .contratar-pill--llamadas {
   background: #A5F3FC;
-  /* Cyan claro */
   color: #0891B2;
   top: -40%;
   left: 8%;
@@ -421,15 +518,13 @@
 
 .contratar-pill--facebook {
   background: #DBEAFE;
-  /* Azul claro */
-  color: #2563EB;
+  color: var(--cambiate-badge-bg);
   top: 40%;
   left: 0%;
 }
 
 .contratar-pill--datos {
   background: #E9D5FF;
-  /* Morado claro */
   color: #7E22CE;
   bottom: -40%;
   left: 8%;
@@ -437,7 +532,6 @@
 
 .contratar-pill--whatsapp {
   background: #FEF08A;
-  /* Amarillo claro */
   color: #A16207;
   top: -50%;
   right: 10%;
@@ -445,15 +539,13 @@
 
 .contratar-pill--masxmenos {
   background: #BFDBFE;
-  /* Azul medio claro */
-  color: #1D4ED8;
+  color: var(--color-blue-dark);
   top: 40%;
   right: 0%;
 }
 
 .contratar-pill--redes {
   background: #FED7AA;
-  /* Naranja/durazno claro */
   color: #C2410C;
   bottom: -40%;
   right: 8%;
@@ -468,9 +560,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  /* Separación título y formulario */
 }
-
 
 .contratar-form {
   display: flex;
@@ -481,31 +571,30 @@
 .contratar-input {
   width: 460px;
   padding: 14px 24px;
-  border-radius: 9999px;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-gray-border);
+  background: var(--color-white);
   font-size: 16px;
-  color: #1a1a2e;
+  color: var(--color-text-body);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .contratar-input:focus {
-  border-color: #1776FF;
+  border-color: var(--color-blue-cta);
   box-shadow: 0 0 0 3px rgba(23, 118, 255, 0.1);
 }
 
 .contratar-cta {
   padding: 15px 36px;
-  border-radius: 9999px;
-  background: #A0F9DE;
-  /* Verde acqua/menta */
-  color: #000000;
+  border-radius: var(--radius-pill);
+  background: var(--color-badge-teal-bg);
+  color: var(--color-black);
   font-size: 15px;
   letter-spacing: 0.04em;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .contratar-cta:hover {
@@ -513,9 +602,7 @@
   box-shadow: 0 6px 16px rgba(160, 249, 222, 0.6);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {}
-
+/* ── Responsive contratar ── */
 @media (max-width: 768px) {
   .contratar-section {
     padding: 50px 24px;
@@ -524,7 +611,7 @@
 
   .contratar-pill {
     display: none;
-    /* Ocultamos pills en móvil para no estorbar el input */
+    /* Ocultar en móvil */
   }
 
   .contratar-input {
@@ -534,4 +621,37 @@
   .contratar-cta {
     padding: 15px 24px;
   }
+}
+
+/* ─── Swiper: Plan Cards Slider ─────────────────────────── */
+
+/* Overflow visible para que el botón -bottom-[28px] no se corte */
+.plan-swiper {
+  overflow: visible !important;
+  padding-bottom: 48px !important;
+  /* Espacio para los dots de paginación */
+}
+
+/* Las slides también deben tener altura completa */
+.plan-swiper .swiper-slide {
+  height: auto;
+}
+
+/* Dots de paginación — color blanco (sección azul y naranja) */
+.plan-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.45);
+  opacity: 1;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.plan-swiper .swiper-pagination-bullet-active {
+  background: var(--color-white);
+  transform: scale(1.3);
+}
+
+/* Posición de los dots debajo del slider */
+.plan-swiper .swiper-pagination {
+  bottom: 12px;
 }

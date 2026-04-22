@@ -2,6 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   DESIGN TOKENS — Variables globales de MegaMóvil
+   Úsalas en cualquier archivo CSS con var(--nombre)
+   ============================================================ */
+:root {
+
+  /* ── Paleta de marca principal ── */
+  --color-bg-page: #e8eff5;
+  /* Fondo general de la página */
+  --color-bg-page-dark: #001b35;
+  /* Fondo oscuro (gradiente inferior) */
+  --color-blue-primary: #0080ff;
+  /* Azul principal sección familiar */
+  --color-blue-dark: #0847c5;
+  /* Azul oscuro / hover */
+  --color-blue-mid: #1565e8;
+  /* Azul medio (sección IMEI) */
+  --color-blue-cta: #1776FF;
+  /* Azul botones y acciones */
+  --color-blue-link: #2B67FF;
+  /* Azul enlaces y footer box */
+  --color-orange-primary: #ff8a00;
+  /* Naranja sección individual */
+  --color-orange-cambiate: #FF6600;
+  /* Naranja sección cámbiate */
+  --color-orange-brand: #FF7F00;
+  /* Naranja borde/texto cards individuales */
+
+  /* ── Colores de acento / badges ── */
+  --color-badge-social-bg: #FFDCF0;
+  --color-badge-social-txt: #E6007E;
+  --color-badge-datos-bg: #DCC5FF;
+  --color-badge-datos-txt: #570C99;
+  --color-badge-datos-bdr: #570C99;
+  --color-badge-blue-bg: #D9F0FF;
+  --color-badge-blue-txt: #1776FF;
+  --color-badge-teal-bg: #A0F9DE;
+  --color-badge-teal-txt: #1E5353;
+  --color-badge-teal-bdr: #1E5353;
+
+  /* ── Colores de redes sociales ── */
+  --social-fb-bg: #0068FF;
+  --social-fb-color: #ffffff;
+  --social-x-bg: #0D0026;
+  --social-x-color: #ffffff;
+  --social-wa-bg: #00D756;
+  --social-wa-color: #ffffff;
+  --social-tg-bg: #0068FF;
+  --social-tg-color: #ffffff;
+  --social-msg-bg: #8E329B;
+  --social-msg-color: #ffffff;
+  --social-snap-bg: #FFFC00;
+  --social-snap-color: #000000;
+  --social-ig-bg: #E5087E;
+  --social-ig-color: #ffffff;
+
+  /* ── Neutrales ── */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-light: #f4f4f5;
+  --color-gray-text: #686868;
+  --color-gray-border: #d1d5db;
+  --color-text-dark: #111827;
+  --color-text-body: #1a1a2e;
+  --color-text-soft: #333333;
+
+  /* ── Benefit cards (marquee) ── */
+  --benefit-blue-bg: #1776FF;
+  --benefit-lavender-bg: #D9CCFF;
+  --benefit-white-bg: #ffffff;
+  --benefit-teal-bg: #A0F9DE;
+
+  /* ── Sección Cámbiate ── */
+  --cambiate-bg: #FF6600;
+  --cambiate-badge-bg: #2563EB;
+
+  /* ── Footer ── */
+  --footer-wa-bg: #EED7FF;
+  --footer-ig-bg: #FF7B00;
+  --footer-tk-bg: #5EE8D6;
+  --footer-x-bg: #ffffff;
+  --footer-fb-bg: #1776FF;
+  --footer-box-bg: #2B67FF;
+
+  /* ── Radios de borde ── */
+  --radius-sm: 0.75rem;
+  /* 12px */
+  --radius-md: 1.25rem;
+  /* 20px */
+  --radius-lg: 1.875rem;
+  /* 30px */
+  --radius-xl: 2rem;
+  /* 32px */
+  --radius-2xl: 3rem;
+  /* 48px */
+  --radius-pill: 9999px;
+
+  /* ── Sombras ── */
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 16px 36px rgba(0, 0, 0, 0.22);
+  --shadow-2xl: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+  /* ── Transiciones ── */
+  --transition-base: 0.2s ease;
+  --transition-card: 0.25s ease;
+  --transition-btn: 0.3s ease;
+
+  /* ── Espaciados de sección ── */
+  --section-gap:   1.5rem;
+  --section-gap-xl:2.5rem;
+
+  /* ── Flechas de Slider (Swiper) ── */
+  --arrow-size:       40px;
+  --arrow-icon-size:  14px;
+  --arrow-bg:         rgba(255, 255, 255, 0.9);
+  --arrow-bg-hover:   #ffffff;
+  --arrow-color:      var(--color-blue-primary);
+  --arrow-color-hover: var(--color-blue-dark);
+  --arrow-shadow:     0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 /* CONFIGURACIÓN DE FUENTES LOCALES */
 @font-face {
   font-family: 'Anton';
@@ -43,4 +166,77 @@
   src: url('./assets/fonts/Poppins-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
+}
+
+/* ============================================================
+   ESTILOS GLOBALES DE FLECHAS PARA SLIDERS
+   Uso: <button class="slider-arrow slider-arrow--prev">
+   Para cambiar colores, sobreescribe las variables --arrow-* 
+   en el contenedor padre.
+   ============================================================ */
+
+.slider-wrapper {
+  position: relative;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: calc(50% - 24px); /* Se ajusta para compensar el padding-bottom de 48px de la paginación */
+  transform: translateY(-50%);
+  z-index: 20;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  border-radius: 50%;
+  border: none;
+  background: var(--arrow-bg);
+  box-shadow: var(--arrow-shadow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.slider-arrow:hover {
+  background: var(--arrow-bg-hover);
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+}
+
+.slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Chevron dibujado con CSS puro */
+.slider-arrow::before {
+  content: '';
+  display: block;
+  width: var(--arrow-icon-size);
+  height: var(--arrow-icon-size);
+  border-top: 3px solid var(--arrow-color);
+  border-right: 3px solid var(--arrow-color);
+  transition: border-color 0.25s ease;
+}
+
+.slider-arrow:hover::before {
+  border-color: var(--arrow-color-hover);
+}
+
+/* Posición y rotación de cada flecha */
+.slider-arrow--prev {
+  left: 6px;
+}
+.slider-arrow--prev::before {
+  /* Centrado óptico seguro usando margin */
+  transform: rotate(-135deg);
+  margin-left: 3px;
+}
+
+.slider-arrow--next {
+  right: 6px;
+}
+.slider-arrow--next::before {
+  /* Centrado óptico seguro usando margin */
+  transform: rotate(45deg);
+  margin-right: 3px;
 }

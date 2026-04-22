@@ -1,6 +1,14 @@
-/* ─── Footer ───────────────────────────────── */
+/* ─── Footer.css — Estilos del componente Footer ───────────
+   Usa variables globales definidas en index.css (:root)
+   ─────────────────────────────────────────────────────────── */
 
+.footer-section {
+  /* Variable local de fondo — definida aquí internamente */
+  --footer-bg: var(--color-bg-page-dark);
+  background: var(--footer-bg);
+}
 
+/* ── Cluster de íconos sociales (posicionamiento absoluto) ── */
 .social-cluster {
   position: relative;
   width: 250px;
@@ -12,8 +20,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
   cursor: pointer;
 }
 
@@ -22,21 +30,22 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
 
+/* ── Íconos individuales: dimensiones, posición y colores ── */
 .social-icon--wa {
-  background: #EED7FF;
-  color: #000000;
+  background: var(--footer-wa-bg);
+  color: var(--color-black);
   width: 100px;
   height: 100px;
   font-size: 54px;
   top: 10px;
-  left: 0px;
+  left: 0;
   z-index: 2;
   border-radius: 36px;
 }
 
 .social-icon--ig {
-  background: #FF7B00;
-  color: #000000;
+  background: var(--footer-ig-bg);
+  color: var(--color-black);
   width: 60px;
   height: 60px;
   font-size: 32px;
@@ -47,8 +56,8 @@
 }
 
 .social-icon--tk {
-  background: #5EE8D6;
-  color: #000000;
+  background: var(--footer-tk-bg);
+  color: var(--color-black);
   width: 55px;
   height: 55px;
   font-size: 28px;
@@ -59,8 +68,8 @@
 }
 
 .social-icon--x {
-  background: #ffffff;
-  color: #000000;
+  background: var(--footer-x-bg);
+  color: var(--color-black);
   width: 65px;
   height: 65px;
   font-size: 36px;
@@ -71,29 +80,30 @@
 }
 
 .social-icon--fb {
-  background: #1776FF;
-  color: #000000;
+  background: var(--footer-fb-bg);
+  color: var(--color-black);
   width: 90px;
   height: 90px;
   font-size: 50px;
-  bottom: 0px;
+  bottom: 0;
   left: 95px;
   border-radius: 32px;
   z-index: 5;
 }
 
+/* ── Caja de links del footer ── */
 .footer-links-box {
-  background: #2B67FF;
-  /* Color azul medio estilo Tailwind blue-500 */
+  background: var(--footer-box-bg);
 }
 
+/* ── Links individuales ── */
 .footer-link {
-  color: #ffffff;
+  color: var(--color-white);
   text-decoration: none;
   font-family: 'Poppins', sans-serif;
   font-size: 20px;
   font-weight: 300;
-  transition: opacity 0.2s ease, text-shadow 0.2s ease;
+  transition: opacity var(--transition-base), text-shadow var(--transition-base);
 }
 
 .footer-link:hover {
