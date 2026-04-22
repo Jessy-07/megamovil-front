@@ -6,7 +6,7 @@ import './Footer.css';
 export default function Footer() {
   return (
     <footer className="footer-section w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden">
-      <div className="container-fluid mx-auto flex flex-col lg:flex-row items-center justify-end gap-[170px]">
+      <div className="container-fluid mx-auto flex flex-col lg:flex-row items-center justify-end gap-[56px] lg:gap-[70px] xl:gap-[100px] 2xl:gap-[170px]">
 
         {/* Columna Izquierda: Iconos y Título */}
         <div className="flex flex-col items-center lg:items-start gap-8">
@@ -27,13 +27,13 @@ export default function Footer() {
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
           </div>
-          <h3 className="font-anton text-white text-[44px] md:text-5xl italic tracking-wide mt-2">
+          <h3 className="font-anton text-white text-[32px] xl:text-5xl italic tracking-wide mt-2">
             LOCALIZA TU CIS
           </h3>
         </div>
 
         {/* Columna Derecha: Caja Azul con Links */}
-        <div className="footer-links-box rounded-[2.5rem] p-10 lg:p-16 w-full lg:w-[65%] flex flex-col items-center lg:items-end text-center lg:text-right gap-3 shadow-2xl">
+        <div className="footer-links-box rounded-[2.5rem] p-10 lg:p-16 w-full lg:w-[65%] flex flex-col items-left lg:items-end text-left lg:text-right gap-3 shadow-2xl">
           <a href="#" className="footer-link">AYUDA</a>
           <a href="#" className="footer-link">LEGALES</a>
           <a href="#" className="footer-link">GARANTÍAS</a>

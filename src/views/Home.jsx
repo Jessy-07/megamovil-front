@@ -121,19 +121,19 @@ export default function Home() {
               </h2>
 
               <span className="floating-badge badge--social badge-left">
-                <img src={socialMediaIcon} alt="Redes Sociales" className="w-5 h-5 md:w-6 md:h-6 object-contain" />
+                <img src={socialMediaIcon} alt="Redes Sociales" className="w-3 h-5 md:w-4 xl:w-6 xl:h-6 object-contain" />
                 REDES SOCIALES
               </span>
               <span className="floating-badge badge--masxmenos badge-center-bottom">
-                <img src={masXMenosIcon} alt="Más x Menos" className="w-5 h-5 md:w-6 md:h-6 object-contain" />
+                <img src={masXMenosIcon} alt="Más x Menos" className="w-3 h-5 md:w-4 xl:w-6 xl:h-6 object-contain" />
                 MÁSXMENOS
               </span>
               <span className="floating-badge badge--datos badge-right-top">
-                <img src={datosIcon} alt="Datos" className="w-5 h-5 md:w-6 md:h-6 object-contain" />
+                <img src={datosIcon} alt="Datos" className="w-3 h-5 md:w-4 xl:w-6 xl:h-6 object-contain" />
                 DATOS
               </span>
               <span className="floating-badge badge--llamadas badge-right">
-                <img src={llamadasIcon} alt="Llamadas" className="w-5 h-5 md:w-6 md:h-6 object-contain" />
+                <img src={llamadasIcon} alt="Llamadas" className="w-3 h-5 md:w-4 xl:w-6 xl:h-6 object-contain" />
                 LLAMADAS
               </span>
             </div>
@@ -155,7 +155,7 @@ export default function Home() {
             </div>
 
             {/* Texto + íconos de redes */}
-            <div className="col-span-12 flex flex-col items-center text-center pt-8 pb-4">
+            <div className="col-span-12 flex flex-col items-center text-center pt-0 md:pt-8 pb-4">
               <p className="bottom-text text-white/90 text-[15px] md:text-[28px] font-thin leading-tight">
                 Todos los planes cuentan con<br />
                 Redes Sociales, Minutos y SMS
@@ -255,7 +255,7 @@ export default function Home() {
             </div>
 
             {/* Texto inferior */}
-            <div className="col-span-12 flex flex-col items-center text-center pt-8 pb-4">
+            <div className="col-span-12 flex flex-col items-center text-center pt-0 md:pt-8 pb-4">
               <h2 className="bottom-text font-medium text-white/90 text-[16px] md:text-[28px] tracking-wide">
                 TODOS NUESTROS PLANES TIENEN<br />
                 <span>+Minutos y SMS incluidos</span>
@@ -268,7 +268,7 @@ export default function Home() {
 
       {/* ── Sección 4: Compatibilidad IMEI ── */}
       <section
-        className="relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-8 md:py-14 shadow-xl"
+        className="relative w-full p-5 2xl:px-0 overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-8 md:py-14 shadow-xl"
         style={{ backgroundColor: 'var(--color-blue-mid)' }}
       >
 
@@ -283,13 +283,13 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
 
             {/* Card izquierda: teléfono IMEI */}
-            <div className="relative flex-shrink-0 w-full md:w-[360px] lg:w-[420px]">
-              <div className="relative bg-white rounded-[1.5rem] overflow-hidden shadow-2xl px-6 pt-5 pb-6 h-[160px] md:h-[210px]">
-                <div className="relative z-10 flex flex-col justify-center h-full w-[55%]">
-                  <span className="text-[10px] md:text-[18px] italic font-normal leading-none mb-1" style={{ color: 'var(--color-gray-text)' }}>
+            <div className="relative flex-shrink-0 w-full md:w-[260px] lg:w-[420px]">
+              <div className="relative bg-white rounded-[1.5rem] overflow-hidden shadow-2xl px-6 pt-5 pb-6 h-[260px] md:h-[280px] lg:h-[220px]">
+                <div className="relative z-10 flex flex-col justify-end lg:justify-center h-full text-center lg:text-left w-[100%] lg:w-[65%] lg:w-[55%]">
+                  <span className="text-[16px] md:text-[18px] italic font-normal leading-none mb-1" style={{ color: 'var(--color-gray-text)' }}>
                     Obtén tu IMEI
                   </span>
-                  <h3 className="font-anton text-[22px] md:text-[40px] leading-[1] uppercase italic" style={{ color: 'var(--color-text-dark)' }}>
+                  <h3 className="font-anton text-[32px] md:text-[40px] leading-[1] uppercase italic" style={{ color: 'var(--color-text-dark)' }}>
                     SOLO MARCA
                   </h3>
                   <p className="leading-snug mt-5" style={{ color: 'var(--color-imei-code, var(--color-bg-page-dark))' }}>
@@ -304,8 +304,8 @@ export default function Home() {
 
             {/* Contenido derecho: formulario */}
             <div className="flex flex-col w-full items-center md:w-auto">
-              <h3 className="title-form-imei font-anton text-white uppercase leading-[1.05] mb-5 tracking-wide">
-                YA LO TIENES...INGRESALO AQUÍ
+              <h3 className="title-form-imei font-anton text-white uppercase text-center md:text-left leading-[1.05] mb-5 tracking-wide">
+                YA LO TIENES... INGRESALO AQUÍ
               </h3>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[600px]">
@@ -319,7 +319,7 @@ export default function Home() {
                 </button>
               </div>
 
-              <p className="text-white text-[11px] md:text-[16px] font-light mt-3">
+              <p className="text-white text-center md:text-left text-[11px] md:text-[16px] font-light mt-3">
                 Conoce nuestros planes compatibles con todos los equipos,{' '}
                 <a href="#" className="underline text-white/90 hover:text-white transition-colors">click aquí</a>
               </p>
@@ -333,32 +333,24 @@ export default function Home() {
       <section className="benefits-marquee-section w-full overflow-hidden">
         <InfiniteMarquee speed={1}>
           <div className="benefit-card benefit-card--blue">
-            <div className="benefit-card__text">
-              <h4 className="benefit-card__title">COBERTURA</h4>
-              <p className="benefit-card__desc">Navega y llama en todo México, EE.UU y Cánada</p>
-            </div>
+            <h4 className="benefit-card__title">COBERTURA</h4>
             <img src={coberturaImg} alt="Cobertura" className="benefit-card__icon" />
+            <p className="benefit-card__desc">Navega y llama en todo México, EE.UU y Cánada</p>
           </div>
           <div className="benefit-card benefit-card--lavender">
-            <div className="benefit-card__text">
-              <h4 className="benefit-card__title">eSIM</h4>
-              <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
-            </div>
+            <h4 className="benefit-card__title">eSIM</h4>
             <img src={esimImg} alt="eSIM" className="benefit-card__icon" />
+            <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
           </div>
           <div className="benefit-card benefit-card--white">
-            <div className="benefit-card__text">
-              <h4 className="benefit-card__title">MÁS MEGAS</h4>
-              <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
-            </div>
+            <h4 className="benefit-card__title">MÁS MEGAS</h4>
             <img src={masGigasImg} alt="Más Megas" className="benefit-card__icon" />
+            <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
           </div>
           <div className="benefit-card benefit-card--teal">
-            <div className="benefit-card__text">
-              <h4 className="benefit-card__title">eSIM</h4>
-              <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
-            </div>
+            <h4 className="benefit-card__title">eSIM</h4>
             <img src={esimImg} alt="eSIM" className="benefit-card__icon" />
+            <p className="benefit-card__desc">Suma Megas a tu internet de casa al contratar Mega móvil.</p>
           </div>
         </InfiniteMarquee>
       </section>
@@ -451,7 +443,7 @@ export default function Home() {
               Quiero contratar Mega móvil
             </h2>
             <div className="contratar-form mt-4">
-              <input type="tel" className="contratar-input shadow-sm" placeholder="" />
+              <input type="tel" className="contratar-input shadow-sm" placeholder="Ingresa tu número" />
               <button className="contratar-cta font-bold">LLAMAME</button>
             </div>
           </div>

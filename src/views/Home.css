@@ -60,7 +60,7 @@
 
 /* El título ocupa todo el ancho del grid y se escala verticalmente */
 .title-p-plan {
-  font-size: clamp(4.5rem, 2.3182rem + 10.9091vw, 10.5rem);
+  font-size: clamp(4.25rem, 2.4643rem + 8.9286vw, 10.5rem);
   transform: scaleY(1.2);
   transform-origin: center;
   display: block;
@@ -70,72 +70,87 @@
 .subtitle-p-plan {
   font-size: clamp(1.5rem, 1.273rem + 1.1348vw, 2rem);
   margin-bottom: 48px;
+  line-height: 30px;
+}
+
+/* ── Posiciones absolutas: badges Plan Familiar ────────── */
+.badge-left,
+.badge-ind-social {
+  left: 0%;
+  top: -18%;
+  transform: translateY(-50%);
+}
+
+.badge-center-bottom,
+.badge-ind-masxmenos {
+  left: 25%;
+  bottom: -25%;
+}
+
+.badge-right-top,
+.badge-ind-datos {
+  right: 0%;
+  top: -20%;
+}
+
+.badge-right,
+.badge-ind-llamadas {
+  right: 8%;
+  top: 45%;
+  transform: translateY(-50%);
 }
 
 @media (min-width: 768px) {
   .subtitle-p-plan {
     margin-bottom: 0;
   }
+
+  /* ── Posiciones absolutas: badges Plan Familiar ────────── */
+  .badge-left,
+  .badge-ind-social {
+    left: 0%;
+    top: 15%;
+    transform: translateY(-50%);
+  }
+
+  .badge-center-bottom,
+  .badge-ind-masxmenos {
+    left: 34%;
+    bottom: 2%;
+  }
+
+  .badge-right-top,
+  .badge-ind-datos {
+    right: 23%;
+    top: 10%;
+  }
+
+  .badge-right,
+  .badge-ind-llamadas {
+    right: 0%;
+    top: 86%;
+    transform: translateY(-50%);
+  }
 }
 
-/* ── Posiciones absolutas: badges Plan Familiar ────────── */
-.badge-left {
-  left: 0%;
-  top: 35%;
-  transform: translateY(-50%);
-}
 
-.badge-center-bottom {
-  left: 34%;
-  bottom: 2%;
-}
 
-.badge-right-top {
-  right: 23%;
-  top: 10%;
-}
 
-.badge-right {
-  right: 0%;
-  top: 35%;
-  transform: translateY(-50%);
-}
-
-/* ── Posiciones absolutas: badges Plan Individual ──────── */
-.badge-ind-social {
-  left: -3%;
-  top: 20%;
-}
-
-.badge-ind-masxmenos {
-  left: 25%;
-  bottom: -5%;
-}
-
-.badge-ind-datos {
-  right: 32%;
-  top: 40%;
-}
-
-.badge-ind-llamadas {
-  right: 4%;
-  top: 30%;
-}
 
 /* ── Estilos compartidos de badge ────────────────────────
    Color/fondo aplicados directamente en JSX con clases
    semánticas de badge. Aquí solo el layout flotante.       */
 .floating-badge,
 .floating-badge-ind {
-  padding: 0.5rem 0.75rem;
+  padding: 3px 5px;
   border-radius: var(--radius-pill);
   border-width: 2px;
   border-style: solid;
-  font-size: 11px;
+  font-size: clamp(0.625rem, 0.473rem + 0.6486vw, 1rem);
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 5px;
   position: absolute;
   z-index: 10;
   box-shadow: var(--shadow-md);
@@ -146,7 +161,8 @@
   .floating-badge,
   .floating-badge-ind {
     padding: 0.5rem 1rem;
-    font-size: 16px;
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
   }
 }
 
@@ -216,14 +232,6 @@
   color: var(--social-ig-color);
 }
 
-/* ── Imagen IMEI ─────────────────────────────────────────── */
-.imei-phone-img {
-  position: absolute;
-  right: -80px;
-  top: 30px;
-  width: 240px;
-  transform: rotate(5deg);
-}
 
 /* ── Botón validar IMEI ──────────────────────────────────── */
 .imei-validate-btn {
@@ -239,10 +247,11 @@
 /* ── Títulos de sección ──────────────────────────────────── */
 .title-section {
   font-size: clamp(2.5rem, 1.5rem + 4vw, 3.5rem);
+  line-height: 45px;
 }
 
 .title-form-imei {
-  font-size: clamp(1.75rem, 1rem + 3.5vw, 3rem);
+  font-size: clamp(2rem, 1.7143rem + 1.4286vw, 3rem);
 }
 
 /* ─── Marquee de Beneficios ─────────────────────────────── */
@@ -254,11 +263,34 @@
   padding: 0;
 }
 
+.imei-phone-img {
+  position: absolute;
+  right: 45%;
+  transform: translateX(50%);
+  top: -10px;
+  width: 160px;
+  rotate: -5deg;
+}
+
 @media (min-width: 768px) {
   .benefits-marquee-section {
     margin-left: -24px;
     margin-right: -24px;
     width: calc(100% + 48px);
+  }
+
+  .imei-phone-img {
+    top: -10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .imei-phone-img {
+    top: 50%;
+    transform: translateY(-50%);
+    right: -50px;
+    width: 220px;
+    rotate: -20deg;
   }
 }
 
@@ -267,6 +299,65 @@
     margin-left: -40px;
     margin-right: -40px;
     width: calc(100% + 80px);
+  }
+
+  /* ── Imagen IMEI ─────────────────────────────────────────── */
+
+  .imei-phone-img {
+    top: 51%;
+    transform: translateY(-50%);
+    right: -80px;
+    width: 240px;
+    rotate: 0deg;
+  }
+
+  .subtitle-p-plan {
+    line-height: 50px;
+  }
+
+  .badge-left {
+    left: 0%;
+    top: 35%;
+    transform: translateY(-50%);
+  }
+
+  .badge-center-bottom {
+    left: 34%;
+    bottom: 2%;
+  }
+
+  .badge-right-top {
+    right: 23%;
+    top: 10%;
+  }
+
+  .badge-right {
+    right: 0%;
+    top: 35%;
+    transform: translateY(-50%);
+  }
+
+
+  .badge-ind-social {
+    left: 0%;
+    top: 20%;
+    transform: translateY(-50%);
+  }
+
+  .badge-ind-masxmenos {
+    left: 34%;
+    bottom: -10%;
+  }
+
+  .badge-ind-datos {
+    right: 23%;
+    top: 10%;
+  }
+
+  .badge-ind-llamadas {
+    right: 0%;
+    top: 35%;
+    transform: translateY(-50%);
   }
 }
 
@@ -296,10 +387,11 @@
 
 /* ── Card base del marquee ── */
 .benefit-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 8px 16px;
   border-radius: var(--radius-2xl);
   padding: 24px 28px;
   width: 450px;
@@ -308,6 +400,54 @@
   box-shadow: var(--shadow-md);
   cursor: pointer;
   transition: transform var(--transition-card), box-shadow var(--transition-card);
+}
+
+/* Desktop grid: título y desc en col 1, icono en col 2 abarcando ambas filas */
+.benefit-card__title {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.benefit-card__desc {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+}
+
+.benefit-card__icon {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  align-self: end;
+}
+
+/* ── Mobile: título → icono → descripción, card full ancho ── */
+@media (max-width: 767px) {
+  .benefit-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: calc(100vw - 60px);
+    min-height: auto;
+    padding: 28px 24px 24px;
+    gap: 12px;
+  }
+
+  /* En mobile los 3 elementos son hijos directos */
+  .benefit-card__title {
+    font-size: 40px !important;
+  }
+
+  .benefit-card__icon {
+    order: 1;
+    width: 100px !important;
+    align-self: center !important;
+  }
+
+  .benefit-card__desc {
+    font-size: 16px !important;
+  }
 }
 
 .benefit-card:hover {
@@ -334,13 +474,6 @@
 }
 
 /* ── Contenido de texto del marquee ── */
-.benefit-card__text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 8px;
-  flex: 1;
-}
 
 .benefit-card__title {
   font-family: 'Anton', sans-serif;
@@ -385,15 +518,19 @@
   z-index: 1;
 }
 
+
+
 @media (max-width: 1024px) {
   .cambiate-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
 }
 
 @media (max-width: 600px) {
   .cambiate-cards-grid {
     grid-template-columns: 1fr;
+    row-gap: 50px;
   }
 }
 
@@ -603,25 +740,62 @@
 }
 
 /* ── Responsive contratar ── */
-@media (max-width: 768px) {
+
+/* Tablet (768px – 1023px): form en fila, input más corto */
+@media (max-width: 1023px) {
+  .contratar-input {
+    width: 280px;
+  }
+}
+
+/* Mobile (< 768px): form en columna, input full ancho */
+@media (max-width: 767px) {
   .contratar-section {
-    padding: 50px 24px;
-    min-height: 220px;
+    padding: 48px 20px;
+    min-height: auto;
+    border-radius: 1.5rem;
   }
 
   .contratar-pill {
     display: none;
-    /* Ocultar en móvil */
+  }
+
+  .contratar-center {
+    gap: 16px;
+    width: 100%;
+  }
+
+  .contratar-form {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
   }
 
   .contratar-input {
-    width: 200px;
+    width: 100%;
+    font-size: 14px;
+    padding: 14px 20px;
+    text-align: center;
   }
 
   .contratar-cta {
-    padding: 15px 24px;
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+
+  .cambiate-card__text {
+    font-size: 16px;
+  }
+
+  .cambiate-badge {
+    top: -10px;
+    left: -10px;
+    width: 40px;
+    height: 40px;
   }
 }
+
 
 /* ─── Swiper: Plan Cards Slider ─────────────────────────── */
 
