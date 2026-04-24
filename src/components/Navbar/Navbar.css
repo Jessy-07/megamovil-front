@@ -1,0 +1,219 @@
+/* ============================================
+   Navbar.css — Estilos del menú principal
+   ============================================ */
+
+.navbar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 24px 0;
+  pointer-events: none;
+  /* Permite clickar debajo si está vacío */
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1), background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ── Smart Nav Dinámico ── */
+.navbar-container.navbar--scrolled {
+  position: fixed;
+  top: 0;
+  /* Ajuste para p-2 */
+  left: 0.5rem;
+  width: calc(100% - 1rem);
+  background-color: var(--color-blue-primary, #3178f5);
+  padding: 12px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 0 2rem 2rem 0;
+  /* Redondeo tipo píldora / sección */
+}
+
+@media (min-width: 768px) {
+  .navbar-container.navbar--scrolled {
+    top: 0;
+    /* Ajuste para md:p-6 */
+    left: 1.5rem;
+    width: calc(100% - 3rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .navbar-container.navbar--scrolled {
+    top: 0;
+    /* Ajuste para xl:p-10 */
+    left: 2.5rem;
+    width: calc(100% - 5rem);
+    border-radius: 0 0 2rem 2rem;
+    /* Redondeo en desktop */
+  }
+}
+
+.navbar-container.navbar--hidden {
+  transform: translateY(-150%);
+}
+
+.navbar-container.navbar--no-transition {
+  transition: none !important;
+}
+
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: auto;
+  /* Reactiva los clicks en el contenido */
+}
+
+/* ── Logo ── */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform var(--transition-base, 0.3s ease);
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #fff;
+  /* Si tuvieran el logo SVG con las flechitas, se vería idéntico. 
+     Por ahora usamos un ícono de FontAwesome blanco. */
+}
+
+.logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+/* ── Menú de Navegación ── */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Pequeño gap entre píldoras */
+}
+
+.nav-pill {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  /* Pill shape */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-pill:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-pill--orange {
+  background-color: #FF851B;
+  /* Ajustar al naranja de marca si es distinto */
+  border-color: #FF851B;
+  font-weight: 600;
+}
+
+.nav-pill--orange:hover {
+  background-color: #e67312;
+  border-color: #e67312;
+}
+
+/* ── Acciones (Botón Ubicación) ── */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.location-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: #fff;
+  color: var(--color-blue-primary, #007bff);
+  border-radius: 50%;
+  font-size: 18px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.location-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Menú móvil ── */
+.mobile-menu-btn {
+  display: none;
+  /* Oculto en escritorio */
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Responsive Menu ── */
+@media (max-width: 1200px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--color-blue-primary, #3178f5);
+    padding: 20px;
+    gap: 15px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    border-radius: 0 0 1.5rem 1.5rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .navbar-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}

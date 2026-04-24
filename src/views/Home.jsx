@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import PlanSlider from '../components/PlanSlider/PlanSlider';
+import Navbar from '../components/Navbar/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faXTwitter, faWhatsapp, faTelegram, faFacebookMessenger, faSnapchat, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import Footer from '../components/Footer/Footer';
@@ -169,6 +170,24 @@ export default function Home() {
       duration: 1, scale: 0.8, opacity: 0, ease: 'power3.out', delay: 0.2
     });
 
+    // 7. Stacked Cards Effect (Efecto apilado - el video se fija, el resto sube sobre él)
+    ScrollTrigger.create({
+      trigger: '.video-section',
+      start: "top top",
+      end: "max",
+      pin: true,
+      pinSpacing: false,
+    });
+
+    // 8. Ocultar el video una vez que el Plan Individual lo cubre por completo
+    // Esto evita que el video se vea por los huecos (gaps) de las siguientes secciones
+    ScrollTrigger.create({
+      trigger: '.plan-ind-section',
+      start: "top top",
+      onEnter: () => gsap.set('.video-section', { opacity: 0 }),
+      onLeaveBack: () => gsap.set('.video-section', { opacity: 1 }),
+    });
+
   }, { scope: mainRef });
 
   return (
@@ -177,9 +196,10 @@ export default function Home() {
 
       {/* ── Sección 1: Plan Familiar (fondo azul) ── */}
       <section
-        className="plan-familiar-section relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl"
+        className="plan-familiar-section relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 pt-24 md:pt-32 shadow-xl"
         style={{ backgroundColor: 'var(--color-blue-primary)' }}
       >
+        <Navbar />
 
         <div className="relative container mx-auto px-4 max-w-[1320px]">
           <div className="grid grid-cols-12 gap-x-4 md:gap-x-6">
@@ -266,7 +286,7 @@ export default function Home() {
       </section>
 
       {/* ── Sección 2: Video ── */}
-      <section className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[550px] overflow-hidden rounded-[2rem] lg:rounded-[3rem] shadow-xl flex items-center justify-center bg-black">
+      <section className="video-section stack-section relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[550px] overflow-hidden rounded-[2rem] lg:rounded-[3rem] shadow-xl flex items-center justify-center bg-black">
         <video
           ref={videoRef}
           src={promoVideo}
