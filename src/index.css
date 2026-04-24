@@ -112,17 +112,17 @@
   --transition-btn: 0.3s ease;
 
   /* ── Espaciados de sección ── */
-  --section-gap:   1.5rem;
-  --section-gap-xl:2.5rem;
+  --section-gap: 1.5rem;
+  --section-gap-xl: 2.5rem;
 
   /* ── Flechas de Slider (Swiper) ── */
-  --arrow-size:       40px;
-  --arrow-icon-size:  14px;
-  --arrow-bg:         rgba(255, 255, 255, 0.9);
-  --arrow-bg-hover:   #ffffff;
-  --arrow-color:      var(--color-blue-primary);
+  --arrow-size: 40px;
+  --arrow-icon-size: 14px;
+  --arrow-bg: rgba(255, 255, 255, 0.9);
+  --arrow-bg-hover: #ffffff;
+  --arrow-color: var(--color-blue-primary);
   --arrow-color-hover: var(--color-blue-dark);
-  --arrow-shadow:     0 4px 12px rgba(0, 0, 0, 0.15);
+  --arrow-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* CONFIGURACIÓN DE FUENTES LOCALES */
@@ -181,7 +181,8 @@
 
 .slider-arrow {
   position: absolute;
-  top: calc(50% - 24px); /* Se ajusta para compensar el padding-bottom de 48px de la paginación */
+  top: calc(50% - 24px);
+  /* Se ajusta para compensar el padding-bottom de 48px de la paginación */
   transform: translateY(-50%);
   z-index: 20;
   width: var(--arrow-size);
@@ -226,6 +227,7 @@
 .slider-arrow--prev {
   left: 6px;
 }
+
 .slider-arrow--prev::before {
   /* Centrado óptico seguro usando margin */
   transform: rotate(-135deg);
@@ -235,8 +237,40 @@
 .slider-arrow--next {
   right: 6px;
 }
+
 .slider-arrow--next::before {
   /* Centrado óptico seguro usando margin */
   transform: rotate(45deg);
   margin-right: 3px;
+}
+
+/* ============================================================
+   ESTILOS DE SCROLLBAR (Barra de Desplazamiento)
+   ============================================================ */
+
+/* Para navegadores basados en WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-page, #e8eff5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-orange-brand, #FF7F00);
+  border-radius: 10px;
+  border: 3px solid var(--color-bg-page, #e8eff5);
+  /* Crea un efecto de espacio interior */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue-primary, #0080ff);
+}
+
+/* Para Firefox */
+html {
+
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-orange-brand) var(--color-bg-page);
 }
