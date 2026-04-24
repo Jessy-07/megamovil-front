@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     // Inicializar el Smooth Scroll (Lenis)
     const lenis = new Lenis({
-      lerp: 0.06,
+      lerp: 0.07,
       smoothWheel: true,
       wheelMultiplier: 1,
     });

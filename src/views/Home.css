@@ -134,7 +134,12 @@
 }
 
 
-
+.imei-section {
+  background-image: url("../assets/img/home/compatibilidad-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 
 /* ── Estilos compartidos de badge ────────────────────────
@@ -154,6 +159,27 @@
   position: absolute;
   z-index: 10;
   box-shadow: var(--shadow-md);
+
+  /* Animación sutil de hover (escala y rotación independientes) */
+  transition: scale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    rotate 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+}
+
+/* Efecto Hover: aumentan de tamaño, saltan un poco la sombra y giran levemente */
+.floating-badge:hover,
+.floating-badge-ind:hover {
+  scale: 1.1;
+  rotate: -4deg;
+  box-shadow: var(--shadow-xl);
+  z-index: 20;
+  /* Para que al crecer se sobrepongan a todo */
+}
+
+/* Para darle variedad, hacemos que unos giren a la derecha y otros a la izquierda */
+.floating-badge:nth-child(even):hover,
+.floating-badge-ind:nth-child(even):hover {
+  rotate: 4deg;
 }
 
 @media (min-width: 768px) {

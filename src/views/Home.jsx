@@ -20,6 +20,10 @@ import solicitaNipIcon from '../assets/icons/home/solicita-nip-icon.png';
 import asociaNipIcon from '../assets/icons/home/asocia-tu-nip.png';
 import tramiteProcesoIcon from '../assets/icons/home/tramite-en-proceso-icon.png';
 import cambioListoIcon from '../assets/icons/home/cambio-megamovil-listo.png';
+import pfWave1 from '../assets/img/home/pf-wave-1.svg';
+import pfWave2 from '../assets/img/home/pf-wave-2.svg';
+import piWave1 from '../assets/img/home/pi-wave-1.svg';
+import combatibilidadBg from '../assets/img/home/combatibilidad-bg.png';
 import './Home.css';
 
 const plans = [
@@ -60,7 +64,7 @@ const individualPlans = [
   },
   {
     title: 'ILIMITADO',
-    data: 'Datos\nIlimitados',
+    data: 'Gigas\nIlimitados',
     dataDesc: '',
     price: '300',
     socials: ['fb', 'x', 'wa', 'tg', 'msg', 'snap', 'ig']
@@ -117,6 +121,47 @@ export default function Home() {
       duration: 1, y: 100, opacity: 0, stagger: 0.2, ease: 'power4.out'
     });
 
+    // Propuesta 2: Animación Olas (Entrada dramática "Marea")
+    gsap.from('.pf-wave-1', {
+      duration: 2,
+      y: -300,
+      rotation: -15,
+      scale: 1.2,
+      opacity: 0,
+      ease: 'power4.out'
+    });
+
+    gsap.from('.pf-wave-2', {
+      duration: 2,
+      y: 300,
+      rotation: 15,
+      scale: 1.2,
+      opacity: 0,
+      ease: 'power4.out',
+      delay: 0.2
+    });
+
+    // Animación infinita "Respiración orgánica" (hace que siempre se estén moviendo solas)
+    gsap.to('.pf-wave-1', {
+      y: "+=30",
+      rotation: "+=3",
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    gsap.to('.pf-wave-2', {
+      y: "-=40",
+      rotation: "-=3",
+      duration: 5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+
+
     // 2. Animación Social Icons Hero
     gsap.from('.social-icon-hero', {
       scrollTrigger: { trigger: '.social-icon-container', start: 'top 85%' },
@@ -136,6 +181,28 @@ export default function Home() {
       scrollTrigger: { trigger: '.plan-ind-cards-container', start: 'top 75%' },
       duration: 1, y: 100, opacity: 0, rotationY: 15, stagger: 0.2, ease: 'power4.out', transformOrigin: 'left center'
     });
+
+    // 3.5 Animación Ola Naranja (Misma que Plan Familiar pero más suave y sin conflictos)
+    // 1. Entrada suave (Solo opacidad y escala para no pelear con el mouse)
+    gsap.from('.pi-wave-1', {
+      scrollTrigger: { trigger: '.plan-ind-section', start: 'top 70%' },
+      duration: 3,
+      scale: 1.05,
+      opacity: 0,
+      ease: 'power2.out'
+    });
+
+    // 2. Respiración Infinita (Idle) - Animamos la imagen directa
+    gsap.to('.pi-wave-1', {
+      y: 20,
+      rotation: 2,
+      duration: 5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+
 
     // 4. IMEI Section
     const tlImei = gsap.timeline({
@@ -198,10 +265,38 @@ export default function Home() {
       <section
         className="plan-familiar-section relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 pt-24 md:pt-32 shadow-xl"
         style={{ backgroundColor: 'var(--color-blue-primary)' }}
+        onMouseMove={(e) => {
+          // Propuesta 2: Efecto magnético/elástico con rotación
+          const { clientX, clientY } = e;
+          const x = (clientX / window.innerWidth - 0.5); // Rango de -0.5 a 0.5
+          const y = (clientY / window.innerHeight - 0.5);
+
+          // Ahora el mouse no solo mueve, sino que tuerce (rota) ligeramente las olas
+          // y usa un rebote 'back.out' para dar una sensación líquida y divertida.
+          gsap.to('.pf-wave-1', {
+            x: x * -80,
+            y: y * -50,
+            rotation: x * -10, // Torsión interactiva
+            duration: 1.5,
+            ease: 'back.out(1.2)' // Sensación de rebote elástico
+          });
+
+          gsap.to('.pf-wave-2', {
+            x: x * 100,
+            y: y * 70,
+            rotation: x * 15,
+            duration: 1.5,
+            ease: 'back.out(1.2)'
+          });
+        }}
       >
+        {/* Background Waves */}
+        <img src={pfWave1} alt="" className="pf-wave pf-wave-1 absolute top-[-700px]  left-[-700px] w-full max-w-[300px] md:max-w-[400px] lg:max-w-[2500px] opacity-100 pointer-events-none z-0 object-contain object-left-bottom" />
+        <img src={pfWave2} alt="" className="pf-wave pf-wave-2 absolute bottom-[-700px] right-[-300px] w-full max-w-[350px] md:max-w-[450px] lg:max-w-[1600px] opacity-100 pointer-events-none z-0 object-contain object-right-top" />
+
         <Navbar />
 
-        <div className="relative container mx-auto px-4 max-w-[1320px]">
+        <div className="relative z-10 container mx-auto px-4 max-w-[1320px]">
           <div className="grid grid-cols-12 gap-x-4 md:gap-x-6">
 
             {/* Subtítulo */}
@@ -299,9 +394,27 @@ export default function Home() {
       <section
         className="plan-ind-section relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 shadow-xl"
         style={{ backgroundColor: 'var(--color-orange-primary)' }}
-      >
+        onMouseMove={(e) => {
+          // 3. Efecto parallax sutil con el mouse (Animamos un contenedor padre para no chocar con la respiración)
+          const { clientX, clientY } = e;
+          const x = (clientX / window.innerWidth - 0.5);
+          const y = (clientY / window.innerHeight - 0.5);
 
-        <div className="relative container mx-auto px-4 max-w-[1320px]">
+          gsap.to('.pi-wave-1-parallax', {
+            x: x * -30,       // Menos desplazamiento
+            y: y * -15,       // Menos desplazamiento
+            rotation: x * -3, // Rotación casi imperceptible
+            duration: 2.5,    // Más tiempo para que sea más lento y suave
+            ease: 'power2.out' // Ease sin rebote
+          });
+        }}
+      >
+        {/* Wrapper de Parallax para evitar el "bajón brusco" */}
+        <div className="pi-wave-1-parallax absolute top-[-800px] left-[-1000px] w-[1500px] md:w-[3500px] lg:w-[3500px] z-0 pointer-events-none">
+          <img src={piWave1} alt="" className="pi-wave-1 w-full max-w-none object-cover" />
+        </div>
+
+        <div className="relative z-10 container mx-auto px-4 max-w-[1320px]">
           <div className="grid grid-cols-12 gap-x-4 md:gap-x-6">
 
             {/* Subtítulo */}
@@ -366,7 +479,12 @@ export default function Home() {
       {/* ── Sección 4: Compatibilidad IMEI ── */}
       <section
         className="imei-section relative w-full p-5 2xl:px-0 overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-8 md:py-14 shadow-xl"
-        style={{ backgroundColor: 'var(--color-blue-mid)' }}
+        style={{
+          backgroundImage: `url(${combatibilidadBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: '#f1f5f9' /* Un color de fallback por si la imagen tarda en cargar */
+        }}
       >
 
         <div className="relative z-10 w-full max-w-[1200px] mx-auto">
