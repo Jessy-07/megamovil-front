@@ -23,7 +23,7 @@ import cambioListoIcon from '../assets/icons/home/cambio-megamovil-listo.png';
 import pfWave1 from '../assets/img/home/pf-wave-1.svg';
 import pfWave2 from '../assets/img/home/pf-wave-2.svg';
 import piWave1 from '../assets/img/home/pi-wave-1.svg';
-import combatibilidadBg from '../assets/img/home/combatibilidad-bg.png';
+import combatibilidadBg from '../assets/img/home/combatibilidad-bg.jpg';
 import cammBg from '../assets/img/home/camm-1.svg';
 import ctaWave1 from '../assets/img/home/cta-1.svg';
 import ctaWave2 from '../assets/img/home/cta-2.svg';
@@ -312,7 +312,7 @@ export default function Home() {
 
   return (
     /* Contenedor principal de la página */
-    <div ref={mainRef} className="home-section min-h-screen p-[20px] flex flex-col items-center gap-[20px]">
+    <div ref={mainRef} className="home-section min-h-screen p-[8px] md:p-[20px] flex flex-col items-center gap-[8px]  md:gap-[20px]">
 
       {/* ── Sección 1: Plan Familiar (fondo azul) ── */}
       <section
@@ -697,7 +697,7 @@ export default function Home() {
 
       {/* ── Sección 7: Quiero contratar Megamóvil ── */}
       <section
-        className="contratar-section relative w-full rounded-[2rem] lg:rounded-[3rem] mb-10 overflow-hidden"
+        className="contratar-section relative w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden"
         onMouseMove={(e) => {
           const { clientX, clientY } = e;
           const x = (clientX / window.innerWidth - 0.5);
@@ -779,7 +779,7 @@ export default function Home() {
 function CardPlan({ plan }) {
   return (
     <div
-      className="card-item relative rounded-[30px] flex flex-col items-center pb-12 shadow-2xl w-full h-full bg-white"
+      className="card-item card-familiar relative rounded-[30px] flex flex-col items-center pb-12 shadow-2xl w-full h-full bg-white"
     >
       {/* Imagen con borde azul */}
       <div
@@ -831,7 +831,7 @@ function CardPlanIndividual({ plan }) {
 
   return (
     <div
-      className="card-item relative rounded-[30px] flex flex-col items-center pt-8 pb-14 shadow-2xl w-full h-full border-[3px] bg-white"
+      className="card-item card-individual relative rounded-[30px] flex flex-col items-center pt-8 pb-14 shadow-2xl w-full h-full border-[3px] bg-white"
       style={{
         borderColor: 'var(--card-ind-border)'
       }}

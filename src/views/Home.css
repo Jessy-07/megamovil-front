@@ -580,13 +580,30 @@
 
 /* ── Cards de Plan Familiar e Individual: mismo brinquito ── */
 .card-item {
+  cursor: pointer;
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.3s ease;
+              box-shadow 0.3s ease,
+              border-color 0.2s ease;
 }
 
 .card-item:hover {
   transform: translateY(-10px);
   box-shadow: var(--shadow-xl);
+}
+
+/* Plan Familiar: sin borde en reposo → outline naranja en hover */
+.card-familiar {
+  outline: 3px solid transparent;
+  outline-offset: 0px;
+}
+
+.card-familiar:hover {
+  outline-color: var(--color-orange-brand);
+}
+
+/* Plan Individual: border naranja en reposo → azul en hover */
+.card-individual:hover {
+  border-color: var(--color-blue-cta) !important;
 }
 
 /* Badge numérico */
