@@ -24,6 +24,9 @@ import pfWave1 from '../assets/img/home/pf-wave-1.svg';
 import pfWave2 from '../assets/img/home/pf-wave-2.svg';
 import piWave1 from '../assets/img/home/pi-wave-1.svg';
 import combatibilidadBg from '../assets/img/home/combatibilidad-bg.png';
+import cammBg from '../assets/img/home/camm-1.svg';
+import ctaWave1 from '../assets/img/home/cta-1.svg';
+import ctaWave2 from '../assets/img/home/cta-2.svg';
 import './Home.css';
 
 const plans = [
@@ -225,6 +228,57 @@ export default function Home() {
     gsap.from('.cambiate-card', {
       scrollTrigger: { trigger: '.cambiate-cards-grid', start: 'top 80%' },
       duration: 0.8, y: 50, opacity: 0, stagger: 0.15, ease: 'back.out(1.2)', clearProps: 'all'
+    });
+
+    // 5.5 Respiración suave para fondo de Cámbiate
+    gsap.to('.camm-wave', {
+      y: "+=45",
+      rotation: "+=4",
+      duration: 4.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    // 6.5 Entrada y respiración de olas CTA
+    gsap.from('.cta-wave-1', {
+      scrollTrigger: { trigger: '.contratar-section', start: 'top 80%' },
+      duration: 2,
+      y: -300,
+      rotation: -15,
+      scale: 1.2,
+      opacity: 0,
+      ease: 'power4.out'
+    });
+
+    gsap.from('.cta-wave-2', {
+      scrollTrigger: { trigger: '.contratar-section', start: 'top 80%' },
+      duration: 2,
+      y: 300,
+      rotation: 15,
+      scale: 1.2,
+      opacity: 0,
+      ease: 'power4.out',
+      delay: 0.2
+    });
+
+    // Animación infinita "Respiración orgánica" para CTA
+    gsap.to('.cta-wave-1', {
+      y: "+=30",
+      rotation: "+=3",
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    gsap.to('.cta-wave-2', {
+      y: "-=40",
+      rotation: "-=3",
+      duration: 5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
     });
 
     // 6. Contratar Section (Pills implosionando)
@@ -573,8 +627,28 @@ export default function Home() {
       </section>
 
       {/* ── Sección 6: Cámbiate a Mega Móvil ── */}
-      <section className="cambiate-section w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-xl">
-        <div className="relative container mx-auto max-w-[1320px] px-4 pt-14 pb-20">
+      <section
+        className="cambiate-section w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-xl"
+        onMouseMove={(e) => {
+          const { clientX, clientY } = e;
+          const x = (clientX / window.innerWidth - 0.5);
+          const y = (clientY / window.innerHeight - 0.5);
+
+          gsap.to('.camm-parallax', {
+            x: x * -30,
+            y: y * -15,
+            rotation: x * -3,
+            duration: 2.5,
+            ease: 'power2.out'
+          });
+        }}
+      >
+        {/* Wrapper de Parallax */}
+        <div className="camm-parallax absolute top-[-1000px] left-[-1000px] w-[1500px] md:w-[3500px] lg:w-[3500px] z-0 pointer-events-none">
+          <img src={cammBg} alt="" className="camm-wave w-full max-w-none object-cover" />
+        </div>
+
+        <div className="relative z-10 container mx-auto max-w-[1320px] px-4 pt-14 pb-20">
           <div className="text-center pb-12 px-4">
             <h2 className="title-section font-anton text-white uppercase text-center leading-none mb-1">
               CÁMBIATE A MEGA MÓVIL
@@ -623,8 +697,35 @@ export default function Home() {
       </section>
 
       {/* ── Sección 7: Quiero contratar Megamóvil ── */}
-      <section className="contratar-section w-full rounded-[2rem] lg:rounded-[3rem] mb-10">
-        <div className="relative container mx-auto max-w-[1320px] px-4">
+      <section
+        className="contratar-section relative w-full rounded-[2rem] lg:rounded-[3rem] mb-10 overflow-hidden"
+        onMouseMove={(e) => {
+          const { clientX, clientY } = e;
+          const x = (clientX / window.innerWidth - 0.5);
+          const y = (clientY / window.innerHeight - 0.5);
+
+          gsap.to('.cta-wave-1', {
+            x: x * -80,
+            y: y * -50,
+            rotation: x * -10,
+            duration: 1.5,
+            ease: 'back.out(1.2)'
+          });
+
+          gsap.to('.cta-wave-2', {
+            x: x * 100,
+            y: y * 70,
+            rotation: x * 15,
+            duration: 1.5,
+            ease: 'back.out(1.2)'
+          });
+        }}
+      >
+        {/* Background Waves */}
+        <img src={ctaWave1} alt="" className="cta-wave-1 absolute top-[-1200px] left-[-700px] w-full max-w-[300px] md:max-w-[400px] lg:max-w-[2500px] opacity-100 pointer-events-none z-0 object-contain object-left-bottom" />
+        <img src={ctaWave2} alt="" className="cta-wave-2 absolute bottom-[-900px] right-[-450px] w-full max-w-[350px] md:max-w-[450px] lg:max-w-[1600px] opacity-100 pointer-events-none z-0 object-contain object-right-top" />
+
+        <div className="relative z-10 container mx-auto max-w-[1320px] px-4">
 
           {/* Pills lado izquierdo */}
           <div className="contratar-pill contratar-pill--llamadas">

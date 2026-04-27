@@ -527,9 +527,6 @@
 .cambiate-section {
   position: relative;
   background-color: var(--cambiate-bg);
-  background-image:
-    radial-gradient(ellipse 90% 100% at 10% 90%, #FF851B 0%, transparent 50%),
-    radial-gradient(ellipse 100% 100% at 80% -10%, #FF5500 0%, transparent 60%);
   overflow: hidden;
 }
 
@@ -639,7 +636,7 @@
 /* ─── Sección: Quiero contratar Megamóvil ──────────────── */
 .contratar-section {
   position: relative;
-  background: var(--contratar-bg);
+  background: #fff;
   padding: 60px 0;
   min-height: 424px;
   display: flex;
