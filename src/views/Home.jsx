@@ -435,11 +435,11 @@ export default function Home() {
       </section>
 
       {/* ── Sección 2: Video ── */}
-      <section className="video-section stack-section relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[550px] overflow-hidden rounded-[2rem] lg:rounded-[3rem] shadow-xl flex items-center justify-center bg-black">
+      <section className="video-section stack-section relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[550px] flex items-center justify-center">
         <video
           ref={videoRef}
           src={promoVideo}
-          className="w-full h-full object-cover pointer-events-none"
+          className="w-full h-full object-cover pointer-events-none rounded-[2rem] lg:rounded-[3rem] shadow-xl bg-black"
           loop muted playsInline
         />
       </section>
@@ -780,8 +780,7 @@ export default function Home() {
 function CardPlan({ plan }) {
   return (
     <div
-      className="card-item relative rounded-[30px] flex flex-col items-center pb-12 shadow-2xl w-full h-full"
-      style={{ backgroundColor: 'var(--card-familiar-bg)' }}
+      className="card-item relative rounded-[30px] flex flex-col items-center pb-12 shadow-2xl w-full h-full bg-white"
     >
       {/* Imagen con borde azul */}
       <div
@@ -833,9 +832,8 @@ function CardPlanIndividual({ plan }) {
 
   return (
     <div
-      className="card-item relative rounded-[30px] flex flex-col items-center pt-8 pb-14 shadow-2xl w-full h-full border-[3px]"
+      className="card-item relative rounded-[30px] flex flex-col items-center pt-8 pb-14 shadow-2xl w-full h-full border-[3px] bg-white"
       style={{
-        backgroundColor: 'var(--card-ind-bg)',
         borderColor: 'var(--card-ind-border)'
       }}
     >

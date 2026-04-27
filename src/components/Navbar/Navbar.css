@@ -18,34 +18,12 @@
 .navbar-container.navbar--scrolled {
   position: fixed;
   top: 0;
-  /* Ajuste para p-2 */
-  left: 0.5rem;
-  width: calc(100% - 1rem);
+  left: 0;
+  width: 100%;
   background-color: var(--color-blue-primary, #3178f5);
   padding: 12px 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border-radius: 0 2rem 2rem 0;
-  /* Redondeo tipo píldora / sección */
-}
-
-@media (min-width: 768px) {
-  .navbar-container.navbar--scrolled {
-    top: 0;
-    /* Ajuste para md:p-6 */
-    left: 1.5rem;
-    width: calc(100% - 3rem);
-  }
-}
-
-@media (min-width: 1280px) {
-  .navbar-container.navbar--scrolled {
-    top: 0;
-    /* Ajuste para xl:p-10 */
-    left: 2.5rem;
-    width: calc(100% - 5rem);
-    border-radius: 0 0 2rem 2rem;
-    /* Redondeo en desktop */
-  }
+  border-radius: 0;
 }
 
 .navbar-container.navbar--hidden {
