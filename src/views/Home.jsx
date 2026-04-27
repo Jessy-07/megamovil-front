@@ -291,29 +291,28 @@ export default function Home() {
       duration: 1, scale: 0.8, opacity: 0, ease: 'power3.out', delay: 0.2
     });
 
-    // 7. Stacked Cards Effect (Efecto apilado - el video se fija, el resto sube sobre él)
-    ScrollTrigger.create({
-      trigger: '.video-section',
-      start: "top top",
-      end: "max",
-      pin: true,
-      pinSpacing: false,
-    });
+    // 7. Stacked Cards Effect (Efecto apilado - DESACTIVADO temporalmente)
+    // ScrollTrigger.create({
+    //   trigger: '.video-section',
+    //   start: "top top",
+    //   end: "max",
+    //   pin: true,
+    //   pinSpacing: false,
+    // });
 
-    // 8. Ocultar el video una vez que el Plan Individual lo cubre por completo
-    // Esto evita que el video se vea por los huecos (gaps) de las siguientes secciones
-    ScrollTrigger.create({
-      trigger: '.plan-ind-section',
-      start: "top top",
-      onEnter: () => gsap.set('.video-section', { opacity: 0 }),
-      onLeaveBack: () => gsap.set('.video-section', { opacity: 1 }),
-    });
+    // 8. Ocultar el video (DESACTIVADO temporalmente)
+    // ScrollTrigger.create({
+    //   trigger: '.plan-ind-section',
+    //   start: "top top",
+    //   onEnter: () => gsap.set('.video-section', { opacity: 0 }),
+    //   onLeaveBack: () => gsap.set('.video-section', { opacity: 1 }),
+    // });
 
   }, { scope: mainRef });
 
   return (
     /* Contenedor principal de la página */
-    <div ref={mainRef} className="home-section min-h-screen p-2 md:p-6 xl:p-10 flex flex-col items-center gap-6 xl:gap-10">
+    <div ref={mainRef} className="home-section min-h-screen p-[20px] flex flex-col items-center gap-[20px]">
 
       {/* ── Sección 1: Plan Familiar (fondo azul) ── */}
       <section

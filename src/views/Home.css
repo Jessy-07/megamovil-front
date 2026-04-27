@@ -42,7 +42,7 @@
 
 /* ─── Fondo general de la página ───────────────────────── */
 .home-section {
-  background: linear-gradient(var(--color-bg-page) 65%, var(--color-bg-page-dark) 75%);
+  background: var(--color-bg-page-dark);
 }
 
 /* ── ROW 2: Título + fila de badges ──────────────────────
@@ -283,9 +283,9 @@
 /* ─── Marquee de Beneficios ─────────────────────────────── */
 .benefits-marquee-section {
   background: transparent;
-  margin-left: -8px;
-  margin-right: -8px;
-  width: calc(100% + 16px);
+  margin-left: -20px;
+  margin-right: -20px;
+  width: calc(100% + 40px);
   padding: 0;
 }
 
@@ -300,9 +300,9 @@
 
 @media (min-width: 768px) {
   .benefits-marquee-section {
-    margin-left: -24px;
-    margin-right: -24px;
-    width: calc(100% + 48px);
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
   }
 
   .imei-phone-img {
@@ -322,9 +322,9 @@
 
 @media (min-width: 1280px) {
   .benefits-marquee-section {
-    margin-left: -40px;
-    margin-right: -40px;
-    width: calc(100% + 80px);
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
   }
 
   /* ── Imagen IMEI ─────────────────────────────────────────── */
@@ -392,7 +392,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: pan-y;
-  padding: 30px;
+  padding: 10px 30px;
 }
 
 .marquee-wrapper:active {
@@ -569,11 +569,23 @@
   text-align: center;
   gap: 20px;
   box-shadow: var(--shadow-lg);
-  transition: transform var(--transition-card), box-shadow var(--transition-card);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
 }
 
 .cambiate-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* ── Cards de Plan Familiar e Individual: mismo brinquito ── */
+.card-item {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+}
+
+.card-item:hover {
+  transform: translateY(-10px);
   box-shadow: var(--shadow-xl);
 }
 
