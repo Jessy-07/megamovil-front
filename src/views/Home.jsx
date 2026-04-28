@@ -27,6 +27,9 @@ import combatibilidadBg from '../assets/img/home/combatibilidad-bg.jpg';
 import cammBg from '../assets/img/home/camm-1.svg';
 import ctaWave1 from '../assets/img/home/cta-1.svg';
 import ctaWave2 from '../assets/img/home/cta-2.svg';
+import paq2Lineas from '../assets/img/home/paq-2-lineas.jpg';
+import paq3Lineas from '../assets/img/home/paq-3-lineas.jpg';
+import paq4Lineas from '../assets/img/home/paq-4-lineas.jpg';
 import './Home.css';
 
 const plans = [
@@ -34,19 +37,19 @@ const plans = [
     title: 'PLAN 2 LÍNEAS',
     lines: ['1 línea de 38 GB*', '1 línea de 6 GB*'],
     price: '270',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop'
+    image: paq2Lineas
   },
   {
     title: 'PLAN 3 LÍNEAS',
     lines: ['1 línea de 38 GB*', '2 líneas de 6 GB*'],
     price: '360',
-    image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=400&auto=format&fit=crop'
+    image: paq3Lineas
   },
   {
     title: 'PLAN 4 LÍNEAS',
     lines: ['1 línea de 38 GB*', '3 líneas de 6 GB*'],
     price: '450',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=400&auto=format&fit=crop'
+    image: paq4Lineas
   }
 ];
 
