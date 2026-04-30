@@ -522,10 +522,32 @@ export default function Home() {
 
             {/* Texto inferior */}
             <div className="col-span-12 flex flex-col items-center text-center pt-0 md:pt-8 pb-4">
-              <h2 className="bottom-text font-medium text-white/90 text-[16px] md:text-[28px] tracking-wide">
-                TODOS NUESTROS PLANES TIENEN<br />
-                <span>+Minutos y SMS incluidos</span>
+              <p className="bottom-text text-white/90 text-[15px] md:text-[28px] font-thin leading-tight">
+                Todos los planes cuentan con<br />
+                Redes Sociales, Minutos y SMS
+              </p>
+              <h2 className="bottom-text font-medium text-white text-3xl md:text-5xl mt-1 tracking-wider">
+                ILIMITADOS
               </h2>
+
+              <div className="flex gap-2 md:gap-3 mt-4 social-icon-container">
+                {[
+                  { id: 'fb', icon: faFacebookF },
+                  { id: 'x', icon: faXTwitter },
+                  { id: 'wa', icon: faWhatsapp },
+                  { id: 'tg', icon: faTelegram },
+                  { id: 'msg', icon: faFacebookMessenger },
+                  { id: 'snap', icon: faSnapchat },
+                  { id: 'ig', icon: faInstagram }
+                ].map((app, i) => (
+                  <div
+                    key={i}
+                    className={`social-icon-hero app-icon social-${app.id} w-8 h-8 md:w-[50px] md:h-[50px] rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-[30px]`}
+                  >
+                    <FontAwesomeIcon icon={app.icon} />
+                  </div>
+                ))}
+              </div>
             </div>
 
           </div>
@@ -795,9 +817,6 @@ function CardPlan({ plan }) {
 
       {/* Contenido */}
       <div className="text-center mt-6 px-4 w-full flex-grow flex flex-col">
-        <p className="text-[10px] text-black font-normal tracking-widest mb-1.5 uppercase leading-none">
-          Conservando tu mismo número
-        </p>
         <h3 className="text-[24px] md:text-[34px] font-semibold text-black leading-tight mb-2">
           {plan.title}
         </h3>
@@ -806,7 +825,11 @@ function CardPlan({ plan }) {
             <p key={i} className="text-[15px] md:text-[24px] font-normal text-black leading-tight">{line}</p>
           ))}
         </div>
-        <div className="mt-auto pt-2 flex flex-col items-center">
+        <p className="text-[10px] text-black font-normal tracking-widest mb-1.5 uppercase leading-none">
+          Conservando tu mismo número
+        </p>
+        <div className="mt-auto pt-5 flex flex-col items-center">
+          <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
           <div className="flex items-start tracking-tighter justify-center leading-none">
             <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
             <span className="text-[18px] md:text-[24px] font-semibold text-black mt-1 leading-none">*</span>
@@ -865,34 +888,13 @@ function CardPlanIndividual({ plan }) {
       </div>
 
       {/* ZONA 3: Precio */}
-      <div className="flex flex-col items-center w-full px-8 pt-4 pb-4">
+      <div className="flex flex-col items-center w-full px-8 pt-4 pb-6">
         <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
         <div className="flex items-start tracking-tighter justify-center leading-none">
           <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
           <span className="text-[16px] md:text-[20px] font-bold text-black mt-1 leading-none">*</span>
         </div>
         <span className="text-[12px] md:text-[14px] text-black font-light mt-0.5 tracking-widest leading-none">al mes</span>
-      </div>
-
-      {/* ZONA 4: Redes ilimitadas + íconos */}
-      <div className="flex flex-col items-center text-center w-full px-4 pt-2 pb-2">
-        <p className="text-[10px] md:text-[11px] text-black tracking-wide mb-3">Conservando tu número</p>
-        <p className="text-[12px] md:text-[14px] text-black leading-tight mb-2">
-          Redes Sociales<br /><b>ILIMITADAS<sup>*</sup></b>
-        </p>
-        <div className="flex gap-1 md:gap-2 flex-wrap justify-center">
-          {plan.socials.map((appKey) => {
-            const app = socialConfig[appKey];
-            return (
-              <div
-                key={appKey}
-                className={`social-${appKey} w-6 h-6 md:w-[45px] md:h-[45px] rounded-[6px] md:rounded-[10px] flex items-center justify-center text-[12px] md:text-[24px] shadow-sm`}
-              >
-                <FontAwesomeIcon icon={app.icon} />
-              </div>
-            );
-          })}
-        </div>
       </div>
 
       {/* Botón */}
