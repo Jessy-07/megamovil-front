@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { TransitionContext } from '../../App';
 import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faBars, faXmark, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/icons/megamovil-logo.png';
 
 export default function Navbar() {
@@ -10,6 +12,26 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [noTransition, setNoTransition] = useState(false);
+  const [consultaOpen, setConsultaOpen] = useState(false);
+  const consultaRef = useRef(null);
+  const transitionTo = useContext(TransitionContext);
+  const location = useLocation();
+
+  const handleNavigate = (path) => {
+    if (location.pathname === path) return;
+    transitionTo(path);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (consultaRef.current && !consultaRef.current.contains(e.target)) {
+        setConsultaOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +81,11 @@ export default function Navbar() {
     <header className={navbarClasses}>
       <div className="navbar-inner container mx-auto px-4 max-w-[1320px]">
         {/* LOGO */}
-        <a href="/" className="navbar-logo">
+        <a
+          href="/"
+          className="navbar-logo"
+          onClick={(e) => { e.preventDefault(); handleNavigate('/'); }}
+        >
           <div className="logo-icon-wrapper">
             <img src={logo} alt="Mega móvil" className="h-8 md:h-10 w-auto object-contain" />
           </div>
@@ -67,7 +93,31 @@ export default function Navbar() {
 
         {/* MENÚ DE NAVEGACIÓN */}
         <nav className={`navbar-links ${isMobileMenuOpen ? 'open' : ''}`}>
-          <a href="#consulta" className="nav-pill" onClick={() => setIsMobileMenuOpen(false)}>CONSULTA</a>
+          {/* Consulta con dropdown */}
+          <div className="nav-dropdown" ref={consultaRef}>
+            <button
+              className={`nav-pill nav-pill--dropdown ${consultaOpen ? 'nav-pill--orange' : ''}`}
+              onClick={() => setConsultaOpen(!consultaOpen)}
+              aria-expanded={consultaOpen}
+            >
+              CONSULTA
+              <FontAwesomeIcon icon={faChevronDown} className={`nav-chevron ${consultaOpen ? 'nav-chevron--open' : ''}`} />
+            </button>
+            {consultaOpen && (
+              <div className="nav-dropdown__menu">
+                <button
+                  className={`nav-dropdown__item${location.pathname === '/roaming-internacional' ? ' nav-dropdown__item--active' : ''}`}
+                  onClick={() => {
+                    handleNavigate('/roaming-internacional');
+                    setConsultaOpen(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Roaming Internacional
+                </button>
+              </div>
+            )}
+          </div>
           <a href="#cambia" className="nav-pill nav-pill--orange" onClick={() => setIsMobileMenuOpen(false)}>CÁMBIA TU LÍNEA</a>
           <a href="#promociones" className="nav-pill" onClick={() => setIsMobileMenuOpen(false)}>PROMOCIONES</a>
           <a href="#tienda" className="nav-pill" onClick={() => setIsMobileMenuOpen(false)}>TIENDA</a>

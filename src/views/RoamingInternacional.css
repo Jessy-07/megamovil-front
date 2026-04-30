@@ -1,0 +1,192 @@
+/* ============================================
+   RoamingInternacional.css
+   ============================================ */
+
+/* ── Fondo general de la página ── */
+.ri-page {
+  background: var(--color-bg-page-dark);
+
+  /* Variables de cards heredadas de Home.css (.home-section) */
+  --card-familiar-bg: #D9D9D9;
+  --card-familiar-border: var(--color-blue-mid);
+  --card-familiar-btn-bg: var(--color-badge-teal-bg);
+  --card-familiar-btn-hover: #8de8cd;
+  --card-ind-bg: #FFE7D0;
+  --card-ind-border: var(--color-orange-brand);
+  --card-ind-btn-bg: var(--color-blue-cta);
+  --card-ind-btn-hover: var(--color-blue-mid);
+}
+
+/* ── Hero: banner imagen ── */
+.ri-hero-section {
+  padding: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.ri-hero-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transform: none !important;
+  rotate: none !important;
+  border-radius: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .ri-hero-banner {
+    border-radius: 3rem;
+  }
+}
+
+/* ── Plans Section ── */
+/* Hover: outline naranja igual que .card-familiar en Home */
+.ri-plans-section .card-individual:hover {
+  outline-color: var(--color-orange-brand) !important;
+}
+
+/* ── Slider overrides ── */
+.ri-plan-slider {
+  --arrow-color: var(--color-blue-primary);
+}
+
+/* ── FAQ Section ── */
+.ri-faq-section {
+  background: #ffffff;
+}
+
+.ri-faq-wave-1,
+.ri-faq-wave-2 {
+  filter: grayscale(1);
+}
+
+.ri-faq-title {
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3.2rem);
+  color: var(--color-blue-primary);
+  letter-spacing: 0.02em;
+}
+
+.ri-faq-item {
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(255,255,255,0.8);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.ri-faq-item--open {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-blue-primary);
+}
+
+.ri-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #111;
+  transition: background-color 0.2s ease;
+}
+
+.ri-faq-question:hover {
+  background-color: rgba(0,0,0,0.03);
+}
+
+.ri-faq-icon {
+  flex-shrink: 0;
+  color: var(--color-blue-primary);
+  font-size: 0.8rem;
+}
+
+.ri-faq-answer {
+  padding: 0 24px 18px;
+  background: transparent;
+}
+
+.ri-faq-answer p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.6);
+  line-height: 1.6;
+}
+
+/* ── CTA Section ── */
+.ri-cta-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.ri-plans-title{
+    font-size: clamp(3rem, 1.9286rem + 5.3571vw, 6.75rem);
+    margin-top: -56px;
+}
+
+@media (min-width: 640px) {
+  .ri-cta-form {
+    flex-direction: row;
+  }
+}
+
+.ri-cta-input {
+  flex: 1;
+  width: 100%;
+  background: #ffffff;
+  border: none;
+  outline: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .ri-cta-input {
+    text-align: left;
+  }
+}
+
+.ri-cta-btn {
+  white-space: nowrap;
+  width: 100%;
+  background-color: var(--color-orange-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 28px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color var(--transition-btn), box-shadow var(--transition-btn);
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 640px) {
+  .ri-cta-btn {
+    width: auto;
+  }
+}
+
+.ri-cta-btn:hover {
+  background-color: var(--color-orange-cambiate);
+  box-shadow: var(--shadow-lg);
+}

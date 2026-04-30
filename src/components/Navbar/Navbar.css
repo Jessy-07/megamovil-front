@@ -163,6 +163,74 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* ── Dropdown Consulta ── */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-pill--dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.nav-pill--dropdown:hover {
+  background-color: #FF851B;
+  border-color: #FF851B;
+  color: #fff;
+}
+
+.nav-chevron {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.nav-chevron--open {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  z-index: 200;
+  animation: dropdownIn 0.2s ease;
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-dropdown__item {
+  display: block;
+  padding: 12px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nav-dropdown__item:hover,
+.nav-dropdown__item--active {
+  background-color: var(--color-orange-brand);
+  color: #ffffff;
+}
+
 /* ── Responsive Menu ── */
 @media (max-width: 1200px) {
   .mobile-menu-btn {
@@ -193,5 +261,26 @@
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+  }
+
+  /* Mobile dropdown: no absolute, se integra en el flujo del menú */
+  .nav-dropdown__menu {
+    position: static;
+    box-shadow: none;
+    border-radius: var(--radius-sm);
+    animation: none;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-dropdown__item {
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .nav-dropdown__item:hover,
+  .nav-dropdown__item--active {
+    background-color: var(--color-orange-brand);
+    color: #ffffff;
   }
 }

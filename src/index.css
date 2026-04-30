@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  background-color: #001b35; /* nunca expone blanco durante transiciones */
+}
+
 /* ============================================================
    DESIGN TOKENS — Variables globales de MegaMóvil
    Úsalas en cualquier archivo CSS con var(--nombre)
