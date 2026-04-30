@@ -47,19 +47,19 @@ html, body {
   --color-badge-teal-bdr: #1E5353;
 
   /* ── Colores de redes sociales ── */
-  --social-fb-bg: #0068FF;
+  --social-fb-bg: #1877F2;   /* Facebook azul oficial */
   --social-fb-color: #ffffff;
-  --social-x-bg: #0D0026;
+  --social-x-bg: #000000;    /* X/Twitter negro oficial */
   --social-x-color: #ffffff;
-  --social-wa-bg: #00D756;
+  --social-wa-bg: #25D366;   /* WhatsApp verde oficial */
   --social-wa-color: #ffffff;
-  --social-tg-bg: #0068FF;
+  --social-tg-bg: #2AABEE;   /* Telegram azul oficial */
   --social-tg-color: #ffffff;
-  --social-msg-bg: #8E329B;
+  --social-msg-bg: #0084FF;  /* Messenger azul oficial */
   --social-msg-color: #ffffff;
-  --social-snap-bg: #FFFC00;
+  --social-snap-bg: #FFFC00; /* Snapchat amarillo oficial */
   --social-snap-color: #000000;
-  --social-ig-bg: #E5087E;
+  --social-ig-bg: #E1306C;   /* Instagram (fallback sólido) */
   --social-ig-color: #ffffff;
 
   /* ── Neutrales ── */
@@ -83,11 +83,11 @@ html, body {
   --cambiate-badge-bg: #2563EB;
 
   /* ── Footer ── */
-  --footer-wa-bg: #EED7FF;
-  --footer-ig-bg: #FF7B00;
-  --footer-tk-bg: #5EE8D6;
-  --footer-x-bg: #ffffff;
-  --footer-fb-bg: #1776FF;
+  --footer-wa-bg: #25D366;  /* WhatsApp verde oficial */
+  --footer-ig-bg: #E1306C;   /* Instagram rosa oficial (fallback) */
+  --footer-tk-bg: #000000;   /* TikTok negro oficial */
+  --footer-x-bg:  #000000;   /* X negro oficial */
+  --footer-fb-bg: #1877F2;  /* Facebook azul oficial */
   --footer-box-bg: #2B67FF;
 
   /* ── Radios de borde ── */
