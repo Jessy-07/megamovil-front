@@ -17,6 +17,7 @@ import llamadasIcon from '../assets/icons/home/llamadas-icon.png';
 import ctaWave1 from '../assets/img/home/cta-1.svg';
 import ctaWave2 from '../assets/img/home/cta-2.svg';
 import bannerRoaming from '../assets/img/roaming-int/banner-roaming-internacional.jpg';
+import bannerRoamingMov from '../assets/img/roaming-int/banner-roaming-internacional-mov.jpg';
 import './RoamingInternacional.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -266,11 +267,14 @@ export default function RoamingInternacional() {
 
       {/* ── Sección 1: Hero — banner imagen estático ── */}
       <section className="ri-hero-section w-full shadow-xl">
-        <img
-          src={bannerRoaming}
-          alt="Planes Internacionales para tu celular"
-          className="ri-hero-banner"
-        />
+        <picture>
+          <source media="(max-width: 767px)" srcSet={bannerRoamingMov} />
+          <img
+            src={bannerRoaming}
+            alt="Planes Internacionales para tu celular"
+            className="ri-hero-banner"
+          />
+        </picture>
       </section>
 
       {/* ── Sección 2: Elige Tu Plan (igual que Plan Familiar del Home) ── */}
