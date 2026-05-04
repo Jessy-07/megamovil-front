@@ -4,6 +4,7 @@
 
 html, body {
   background-color: #001b35; /* nunca expone blanco durante transiciones */
+  overflow-x: hidden;
 }
 
 /* ============================================================

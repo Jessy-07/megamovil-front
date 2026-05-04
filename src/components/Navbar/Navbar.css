@@ -39,8 +39,23 @@
   justify-content: space-between;
   align-items: center;
   pointer-events: auto;
+  min-height: 56px;
   /* Reactiva los clicks en el contenido */
 }
+@media (min-width:767px) {
+  .navbar-inner{
+    min-height: 65px;
+  }
+}
+@media (min-width:1200px) {
+  .navbar-inner{
+    min-height: 0px;
+  }
+  .navbar-container{
+    padding: 20px 0;
+  }
+}
+
 
 /* ── Logo ── */
 .navbar-logo {
@@ -61,8 +76,7 @@
   justify-content: center;
   font-size: 32px;
   color: #fff;
-  /* Si tuvieran el logo SVG con las flechitas, se vería idéntico. 
-     Por ahora usamos un ícono de FontAwesome blanco. */
+  line-height: 1;
 }
 
 .logo-text {
@@ -233,6 +247,10 @@
 
 /* ── Responsive Menu ── */
 @media (max-width: 1200px) {
+  .navbar-container {
+    padding: 10px 0;
+  }
+
   .mobile-menu-btn {
     display: flex;
   }

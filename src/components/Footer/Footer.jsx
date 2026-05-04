@@ -27,7 +27,7 @@ export default function Footer() {
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
           </div>
-          <h3 className="font-anton text-white text-[32px] xl:text-5xl italic tracking-wide mt-2">
+          <h3 className="font-anton text-white text-[40px] xl:text-5xl italic tracking-wide mt-2">
             LOCALIZA TU CIS
           </h3>
         </div>

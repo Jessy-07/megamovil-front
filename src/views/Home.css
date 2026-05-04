@@ -99,11 +99,20 @@
   top: 45%;
   transform: translateY(-50%);
 }
+@media (max-width: 767px){
+.social-icon-hero {
+  font-size: 20px;
+}
+
+}
 
 @media (min-width: 768px) {
   .subtitle-p-plan {
     margin-bottom: 0;
   }
+  .social-icon-hero {
+  font-size: 26px;
+}
 
   /* ── Posiciones absolutas: badges Plan Familiar ────────── */
   .badge-left,
@@ -254,7 +263,7 @@
 }
 
 .social-ig {
-  background: linear-gradient(45deg, #FCAF45, #F77737, #F56040, #FD1D1D, #E1306C, #C13584, #833AB4, #5851DB, #405DE6);
+  background: #fc01a5;
   color: var(--social-ig-color);
 }
 
@@ -272,20 +281,20 @@
 
 /* ── Títulos de sección ──────────────────────────────────── */
 .title-section {
-  font-size: clamp(2.5rem, 1.5rem + 4vw, 3.5rem);
-  line-height: 45px;
+  font-size: clamp(2.875rem, 2.6964rem + 0.8929vw, 3.5rem);
+  line-height: 52px;
 }
 
 .title-form-imei {
-  font-size: clamp(2rem, 1.7143rem + 1.4286vw, 3rem);
+  font-size: clamp(2.5rem, 2.3571rem + 0.7143vw, 3rem);
 }
 
 /* ─── Marquee de Beneficios ─────────────────────────────── */
 .benefits-marquee-section {
   background: transparent;
-  margin-left: -20px;
-  margin-right: -20px;
-  width: calc(100% + 40px);
+  margin-left: -8px;
+  margin-right: -8px;
+  width: calc(100% + 16px);
   padding: 0;
 }
 
@@ -293,7 +302,7 @@
   position: absolute;
   right: 45%;
   transform: translateX(50%);
-  top: -10px;
+  top: -18px;
   width: 160px;
   rotate: -5deg;
 }
@@ -304,6 +313,7 @@
     margin-right: -20px;
     width: calc(100% + 40px);
   }
+
 
   .imei-phone-img {
     top: -10px;
@@ -326,6 +336,7 @@
     margin-right: -20px;
     width: calc(100% + 40px);
   }
+
 
   /* ── Imagen IMEI ─────────────────────────────────────────── */
 
@@ -461,18 +472,10 @@
   }
 
   /* En mobile los 3 elementos son hijos directos */
-  .benefit-card__title {
-    font-size: 40px !important;
-  }
-
   .benefit-card__icon {
     order: 1;
     width: 100px !important;
     align-self: center !important;
-  }
-
-  .benefit-card__desc {
-    font-size: 16px !important;
   }
 }
 
@@ -503,14 +506,14 @@
 
 .benefit-card__title {
   font-family: 'Anton', sans-serif;
-  font-size: 56px;
+  font-size: clamp(2.75rem, 2.5357rem + 1.0714vw, 3.5rem);
   font-style: italic;
   line-height: 1;
   letter-spacing: 0.02em;
 }
 
 .benefit-card__desc {
-  font-size: 22px;
+ font-size: clamp(1.125rem, 1.0536rem + 0.3571vw, 1.375rem);
   font-weight: 300;
   line-height: 1.45;
   opacity: 0.88;
@@ -630,7 +633,7 @@
 }
 
 .cambiate-card__text {
-  font-size: 20px;
+  font-size: clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem);
   font-weight: 400;
   color: var(--color-text-soft);
   line-height: 1.5;
@@ -779,7 +782,7 @@
   border-radius: var(--radius-pill);
   background: var(--color-badge-teal-bg);
   color: var(--color-black);
-  font-size: 15px;
+  font-size: 18px;
   letter-spacing: 0.04em;
   border: none;
   cursor: pointer;
@@ -833,12 +836,9 @@
   .contratar-cta {
     width: 100%;
     padding: 14px 24px;
-    font-size: 16px;
   }
 
-  .cambiate-card__text {
-    font-size: 16px;
-  }
+  
 
   .cambiate-badge {
     top: -10px;

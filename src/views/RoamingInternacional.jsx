@@ -157,7 +157,7 @@ function RoamingCard({ plan }) {
       {/* Título */}
       <div className="flex flex-col items-center w-full px-4 pb-3">
         <h3
-          className="text-[28px] md:text-[54px] font-anton tracking-wider leading-none"
+          className="text-[56px] md:text-[60px] font-anton tracking-wider leading-none"
           style={{ color: 'var(--color-orange-brand)' }}
         >
           {plan.title}
@@ -167,27 +167,27 @@ function RoamingCard({ plan }) {
 
       {/* Datos */}
       <div className="flex flex-1 flex-col items-center justify-center text-center px-4">
-        <span className="text-[48px] md:text-[60px] font-semibold text-black tracking-tight leading-none">{plan.data}</span>
-        <span className="text-[13px] md:text-[24px] font-light text-black leading-none mt-0.5">{plan.dataDesc}</span>
+        <span className="text-[48px] md:text-[48px] font-semibold text-black tracking-tight leading-none">{plan.data}</span>
+        <span className="text-[16px] md:text-[20px] font-light text-black leading-none mt-0.5">{plan.dataDesc}</span>
       </div>
 
       {/* Precio */}
       <div className="flex flex-col items-center w-full px-8 pt-8 pb-4">
-        <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
+        <span className="text-[14px] md:text-[16px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
         <div className="flex items-start tracking-tighter justify-center leading-none">
-          <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
+          <span className="text-[56px] md:text-[64px] font-semibold text-black leading-none">${plan.price}</span>
           <span className="text-[16px] md:text-[20px] font-bold text-black mt-1 leading-none">*</span>
         </div>
-        <span className="text-[12px] md:text-[14px] text-black font-light mt-0.5 tracking-widest leading-none">al mes</span>
+        <span className="text-[14px] md:text-[16px] text-black font-light mt-0.5 tracking-widest leading-none">al mes</span>
       </div>
 
       {/* Botón */}
       <button
-        className="card-familiar-btn absolute -bottom-[24px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 rounded-full text-[16px] md:text-[20px] font-semibold text-black shadow-xl transition-colors duration-300"
+        className="card-familiar-btn absolute -bottom-[24px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 rounded-full text-[18px] md:text-[20px] font-semibold text-black shadow-xl transition-colors duration-300"
         style={{ backgroundColor: 'var(--card-familiar-btn-bg)' }}
         onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--card-familiar-btn-hover)'}
         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--card-familiar-btn-bg)'}
-      >¡LO QUIERO!</button>
+      >¡CONTRATA AQUÍ!</button>
     </div>
   );
 }
@@ -253,6 +253,7 @@ export default function RoamingInternacional() {
 
   }, { scope: mainRef });
 
+
   return (
     <div ref={mainRef} className="ri-page min-h-screen p-[8px] md:p-[20px] flex flex-col items-center gap-[8px] md:gap-[20px]">
 
@@ -265,19 +266,7 @@ export default function RoamingInternacional() {
         <div className="pt-[72px] md:pt-[80px]" />
       </section>
 
-      {/* ── Sección 1: Hero — banner imagen estático ── */}
-      <section className="ri-hero-section w-full shadow-xl">
-        <picture>
-          <source media="(max-width: 767px)" srcSet={bannerRoamingMov} />
-          <img
-            src={bannerRoaming}
-            alt="Planes Internacionales para tu celular"
-            className="ri-hero-banner"
-          />
-        </picture>
-      </section>
-
-      {/* ── Sección 2: Elige Tu Plan (igual que Plan Familiar del Home) ── */}
+      {/* ── Sección 1: Elige Tu Plan (igual que Plan Familiar del Home) ── */}
       <section
         className="ri-plans-section relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] py-10 md:py-16 pt-24 md:pt-16 shadow-xl"
         style={{ backgroundColor: 'var(--color-blue-primary)' }}
@@ -331,6 +320,18 @@ export default function RoamingInternacional() {
         </div>
       </section>
 
+      {/* ── Sección 2: Hero — banner imagen estático ── */}
+      <section className="ri-hero-section w-full shadow-xl">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={bannerRoamingMov} />
+          <img
+            src={bannerRoaming}
+            alt="Planes Internacionales para tu celular"
+            className="ri-hero-banner"
+          />
+        </picture>
+      </section>
+
       {/* ── Sección 3: Preguntas Frecuentes ── */}
       <section
         className="ri-faq-section relative w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-xl py-12 md:py-20"
@@ -345,7 +346,7 @@ export default function RoamingInternacional() {
         <img src={ctaWave1} alt="" className="ri-faq-wave-1 absolute top-[-1100px] left-[-700px] w-full max-w-[300px] md:max-w-[400px] lg:max-w-[2500px] pointer-events-none z-0 object-contain object-left-bottom" />
         <img src={ctaWave2} alt="" className="ri-faq-wave-2 absolute bottom-[-900px] right-[-450px] w-full max-w-[350px] md:max-w-[450px] lg:max-w-[1600px] pointer-events-none z-0 object-contain object-right-top" />
         <div className="relative z-10 container mx-auto px-4 max-w-[900px]">
-          <h2 className="ri-faq-title title-section font-anton text-center uppercase leading-none mb-10 md:mb-14" style={{ color: '#111' }}>
+          <h2 className="title-section font-anton text-center uppercase leading-none mb-10 md:mb-14">
             Preguntas Frecuentes
           </h2>
 

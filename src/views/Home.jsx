@@ -35,19 +35,28 @@ import './Home.css';
 const plans = [
   {
     title: 'PLAN 2 LÍNEAS',
-    lines: ['1 línea de 38 GB*', '1 línea de 6 GB*'],
+    lines: [
+  <>1 línea de 38 GB<sup className='text-[12px] md:top-[28px] md:left-[-10px]'>*</sup></>,
+  <>1 línea de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-40px] md:left-[5px]'>*</sup></>
+],
     price: '270',
     image: paq2Lineas
   },
   {
     title: 'PLAN 3 LÍNEAS',
-    lines: ['1 línea de 38 GB*', '2 líneas de 6 GB*'],
+    lines: [
+  <>1 línea de 38 GB<sup className='text-[12px] md:top-[28px] md:left-[0px]'>*</sup></>,
+  <>2 líneas de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-40px] md:left-[-5px]'>*</sup></>
+],
     price: '360',
     image: paq3Lineas
   },
   {
     title: 'PLAN 4 LÍNEAS',
-    lines: ['1 línea de 38 GB*', '3 líneas de 6 GB*'],
+    lines: [
+  <>1 línea de 38 GB<sup className='text-[12px] md:top-[28px] md:left-[0px]'>*</sup></>,
+  <>3 líneas de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-40px] md:left-[-5px]'>*</sup></>
+],
     price: '450',
     image: paq4Lineas
   }
@@ -55,25 +64,25 @@ const plans = [
 
 const individualPlans = [
   {
-    title: 'ESENCIAL',
-    data: '6GB',
+    title: (<>6GB<sup className='text-[14px] top-[-32px] md:top-[-40px]'>*</sup></>),
     dataDesc: 'para navegar',
     price: '100',
-    socials: ['fb', 'x', 'wa', 'tg', 'msg']
+    socials: ['fb', 'x', 'wa', 'tg', 'msg'],
+    isMultiLine: false
   },
   {
-    title: 'CONECTADO',
-    data: '30GB',
+    title: (<>30GB<sup className='text-[14px] top-[-32px] md:top-[-40px]'>*</sup></>),
     dataDesc: 'para navegar',
     price: '200',
-    socials: ['fb', 'x', 'wa', 'tg', 'msg']
+    socials: ['fb', 'x', 'ig', 'wa', 'snap', 'tg', 'msg'],
+    isMultiLine: false
   },
   {
-    title: 'ILIMITADO',
-    data: 'Gigas\nIlimitados',
-    dataDesc: '',
+    title: 'GIGAS\nILIMITADOS',
+    dataDesc: 'para navegar',
     price: '300',
-    socials: ['fb', 'x', 'wa', 'tg', 'msg', 'snap', 'ig']
+    socials: ['fb', 'x', 'ig', 'wa', 'snap', 'tg', 'msg'],
+    isMultiLine: true
   }
 ];
 
@@ -404,15 +413,15 @@ export default function Home() {
 
             {/* Texto + íconos de redes */}
             <div className="col-span-12 flex flex-col items-center text-center pt-0 md:pt-8 pb-4">
-              <p className="bottom-text text-white/90 text-[15px] md:text-[28px] font-thin leading-tight">
+              <p className="bottom-text text-white/90 text-[20px] md:text-[28px] font-thin leading-tight">
                 Todos los planes cuentan con<br />
                 Redes Sociales, Minutos y SMS
               </p>
-              <h2 className="bottom-text font-medium text-white text-3xl md:text-5xl mt-1 tracking-wider">
-                ILIMITADOS
+              <h2 className="bottom-text font-medium text-white text-[36px] md:text-5xl mt-1 tracking-wider">
+                ILIMITADOS<sup className="text-[18px] top-[-14px] md:top-[-20px]">*</sup>
               </h2>
 
-              <div className="flex gap-2 md:gap-3 mt-4 social-icon-container">
+              <div className="flex flex-wrap justify-center gap-2 md:gap-3 mt-4 social-icon-container">
                 {[
                   { id: 'fb', icon: faFacebookF },
                   { id: 'x', icon: faXTwitter },
@@ -424,7 +433,7 @@ export default function Home() {
                 ].map((app, i) => (
                   <div
                     key={i}
-                    className={`social-icon-hero app-icon social-${app.id} w-8 h-8 md:w-[50px] md:h-[50px] rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-[30px]`}
+                    className={`social-icon-hero app-icon social-${app.id} w-9 h-9 md:w-[50px] md:h-[50px] rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-[30px]`}
                   >
                     <FontAwesomeIcon icon={app.icon} />
                   </div>
@@ -522,32 +531,15 @@ export default function Home() {
 
             {/* Texto inferior */}
             <div className="col-span-12 flex flex-col items-center text-center pt-0 md:pt-8 pb-4">
-              <p className="bottom-text text-white/90 text-[15px] md:text-[28px] font-thin leading-tight">
+              <p className="bottom-text text-white/90 text-[20px] md:text-[28px] font-thin leading-tight">
                 Todos los planes cuentan con<br />
-                Redes Sociales, Minutos y SMS
+                Minutos y SMS
               </p>
-              <h2 className="bottom-text font-medium text-white text-3xl md:text-5xl mt-1 tracking-wider">
-                ILIMITADOS
+              <h2 className="bottom-text font-medium text-white text-[36px] md:text-5xl mt-1 tracking-wider">
+                ILIMITADOS<sup className="text-[18px] top-[-14px] md:top-[-20px]">*</sup>
               </h2>
 
-              <div className="flex gap-2 md:gap-3 mt-4 social-icon-container">
-                {[
-                  { id: 'fb', icon: faFacebookF },
-                  { id: 'x', icon: faXTwitter },
-                  { id: 'wa', icon: faWhatsapp },
-                  { id: 'tg', icon: faTelegram },
-                  { id: 'msg', icon: faFacebookMessenger },
-                  { id: 'snap', icon: faSnapchat },
-                  { id: 'ig', icon: faInstagram }
-                ].map((app, i) => (
-                  <div
-                    key={i}
-                    className={`social-icon-hero app-icon social-${app.id} w-8 h-8 md:w-[50px] md:h-[50px] rounded-lg md:rounded-xl shadow-lg flex items-center justify-center text-base md:text-[30px]`}
-                  >
-                    <FontAwesomeIcon icon={app.icon} />
-                  </div>
-                ))}
-              </div>
+              
             </div>
 
           </div>
@@ -569,7 +561,7 @@ export default function Home() {
           <h2 className="title-section font-anton text-white uppercase text-center leading-none mb-1">
             ¿MI EQUIPO ES COMPATIBLE?
           </h2>
-          <p className="text-white text-[13px] md:text-[28px] font-normal text-center mb-6 md:mb-10">
+          <p className="text-white text-[20px] md:text-[28px] font-normal text-center mb-10">
             Descubre la forma para obtener el IMEI!
           </p>
 
@@ -579,15 +571,15 @@ export default function Home() {
             <div className="relative flex-shrink-0 w-full md:w-[260px] lg:w-[420px]">
               <div className="imei-card-box relative bg-white rounded-[1.5rem] overflow-hidden shadow-2xl px-6 pt-5 pb-6 h-[260px] md:h-[280px] lg:h-[220px]">
                 <div className="relative z-10 flex flex-col justify-end lg:justify-center h-full text-center lg:text-left w-[100%] lg:w-[65%] lg:w-[55%]">
-                  <span className="text-[16px] md:text-[18px] italic font-normal leading-none mb-1" style={{ color: 'var(--color-gray-text)' }}>
+                  <span className="text-[18px] italic font-normal leading-none mb-1" style={{ color: 'var(--color-gray-text)' }}>
                     Obtén tu IMEI
                   </span>
-                  <h3 className="font-anton text-[32px] md:text-[40px] leading-[1] uppercase italic" style={{ color: 'var(--color-text-dark)' }}>
+                  <h3 className="font-anton text-[40px] leading-[1] uppercase italic" style={{ color: 'var(--color-text-dark)' }}>
                     SOLO MARCA
                   </h3>
                   <p className="leading-snug mt-5" style={{ color: 'var(--color-imei-code, var(--color-bg-page-dark))' }}>
-                    <span className="text-[24px]">*#06#</span><br />
-                    <span className="font-normal text-[18px]">desde tu celular.</span>
+                    <span className="text-[28px]">*#06#</span><br />
+                    <span className="font-normal text-[20px]">desde tu celular.</span>
                   </p>
                 </div>
               </div>
@@ -607,14 +599,14 @@ export default function Home() {
                 <input
                   type="text"
                   placeholder="INGRESA AQUÍ TU IMEI"
-                  className="flex-1 w-full sm:w-auto bg-white rounded-full border-none outline-none text-gray-600 placeholder-gray-400 text-[11px] md:text-[12px] font-semibold px-6 py-3.5 uppercase tracking-wider shadow-lg text-center sm:text-left"
+                  className="flex-1 w-full sm:w-auto bg-white rounded-full border-none outline-none text-gray-600 placeholder-gray-400 text-[14px] md:text-[16px] font-semibold px-6 py-3.5 uppercase tracking-wider shadow-lg text-center sm:text-left"
                 />
-                <button className="imei-validate-btn w-full sm:w-auto font-black uppercase rounded-full px-6 md:px-8 py-3 text-[12px] md:text-[16px] shadow-lg whitespace-nowrap transition-colors">
+                <button className="imei-validate-btn w-full sm:w-auto font-black uppercase rounded-full px-6 md:px-8 py-3 text-[18px] shadow-lg whitespace-nowrap transition-colors">
                   VALIDA AQUÍ
                 </button>
               </div>
 
-              <p className="text-white text-center md:text-left text-[11px] md:text-[16px] font-light mt-3">
+              <p className="text-white text-center md:text-left text-[14px] md:text-[16px] font-light mt-3">
                 Conoce nuestros planes compatibles con todos los equipos,{' '}
                 <a href="#" className="underline text-white/90 hover:text-white transition-colors">click aquí</a>
               </p>
@@ -677,7 +669,7 @@ export default function Home() {
             <h2 className="title-section font-anton text-white uppercase text-center leading-none mb-1">
               CÁMBIATE A MEGA MÓVIL
             </h2>
-            <p className="text-white text-[13px] md:text-[28px] font-normal text-center mb-6 md:mb-10">
+            <p className="text-white text-[20px] md:text-[28px] font-normal text-center mb-6 md:mb-10">
               Cambiate y conserva tu número, fácil y rápido.
             </p>
           </div>
@@ -817,35 +809,35 @@ function CardPlan({ plan }) {
 
       {/* Contenido */}
       <div className="text-center mt-6 px-4 w-full flex-grow flex flex-col">
-        <h3 className="text-[24px] md:text-[34px] font-semibold text-black leading-tight mb-2">
+        <h3 className="text-[28px] md:text-[34px] font-semibold text-black leading-tight mb-2">
           {plan.title}
         </h3>
         <div className="flex flex-col gap-1 mb-4">
           {plan.lines.map((line, i) => (
-            <p key={i} className="text-[15px] md:text-[24px] font-normal text-black leading-tight">{line}</p>
+            <p key={i} className="text-[20px] md:text-[24px] font-normal text-black leading-tight">{line}</p>
           ))}
         </div>
-        <p className="text-[10px] text-black font-normal tracking-widest mb-1.5 uppercase leading-none">
+        <p className="text-[11px] text-black font-normal tracking-widest mb-1.5 uppercase leading-none">
           Conservando tu mismo número
         </p>
         <div className="mt-auto pt-5 flex flex-col items-center">
-          <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
+          <span className="text-[14px] md:text-[16px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
           <div className="flex items-start tracking-tighter justify-center leading-none">
-            <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
-            <span className="text-[18px] md:text-[24px] font-semibold text-black mt-1 leading-none">*</span>
+            <span className="text-[56px] md:text-[64px] font-semibold text-black leading-none">${plan.price}</span>
+            <span className="text-[20px] md:text-[24px] font-semibold text-black mt-1 leading-none">*</span>
           </div>
-          <span className="text-[12px] md:text-[16px] text-black font-light mt-0 tracking-widest leading-none">al mes</span>
+          <span className="text-[14px] md:text-[16px] text-black font-light mt-0 tracking-widest leading-none">al mes</span>
         </div>
       </div>
 
       {/* Botón */}
       <button
-        className="card-familiar-btn absolute -bottom-[28px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 rounded-full text-[16px] md:text-[20px] font-semibold text-black shadow-xl transition-colors duration-300"
+        className="card-familiar-btn absolute -bottom-[28px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 rounded-full text-[18px] md:text-[20px] font-semibold text-black shadow-xl transition-colors duration-300"
         style={{ backgroundColor: 'var(--card-familiar-btn-bg)' }}
         onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--card-familiar-btn-hover)'}
         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--card-familiar-btn-bg)'}
       >
-        ¡LO QUIERO!
+        ¡CONTRATA AQUÍ!
       </button>
     </div>
   );
@@ -853,7 +845,7 @@ function CardPlan({ plan }) {
 
 /* ── CardPlanIndividual: Plan Individual ──────────────────── */
 function CardPlanIndividual({ plan }) {
-  const isMultiLineData = plan.data.includes('\n');
+
 
   return (
     <div
@@ -862,49 +854,71 @@ function CardPlanIndividual({ plan }) {
         borderColor: 'var(--card-ind-border)'
       }}
     >
-      {/* ZONA 1: Título */}
+      {/* ZONA 1: Título (GB amount) — altura fija para alinear divisor entre cards */}
       <div className="flex flex-col items-center w-full px-4 pb-3">
-        <h3
-          className="text-[28px] md:text-[54px] font-anton tracking-wider leading-none"
-          style={{ color: 'var(--color-orange-brand)' }}
-        >
-          {plan.title}
-        </h3>
+        <div className="flex flex-col items-center justify-center min-h-[90px] md:min-h-[110px]">
+          <h3
+            className={`font-anton tracking-wider leading-none text-center whitespace-pre-line ${
+              plan.isMultiLine
+                ? 'text-[40px] md:text-[42px]'
+                : 'text-[56px] md:text-[60px]'
+            }`}
+            style={{ color: 'var(--color-orange-brand)' }}
+          >
+            {plan.title}
+          </h3>
+          {plan.dataDesc && (
+            <span className="text-[16px] font-light text-black leading-none mt-1">
+              {plan.dataDesc}
+            </span>
+          )}
+        </div>
         <div className="w-[60%] h-[1px] mt-3" style={{ backgroundColor: 'var(--color-orange-brand)' }} />
       </div>
 
-      {/* ZONA 2: Gigas */}
-      <div className="flex flex-1 flex-col items-center justify-center text-center px-4">
-        {isMultiLineData ? (
-          <span className="text-[36px] md:text-[40px] font-semibold text-black tracking-tight whitespace-pre-line leading-[1.1]">
-            {plan.data}
-          </span>
-        ) : (
-          <>
-            <span className="text-[48px] md:text-[60px] font-semibold text-black tracking-tight leading-none">{plan.data}</span>
-            <span className="text-[13px] md:text-[14px] font-light text-black leading-none mt-0.5">{plan.dataDesc}</span>
-          </>
-        )}
+      {/* ZONA 2: Redes Sociales */}
+      <div className="flex flex-1 flex-col items-center justify-center text-center px-4 py-3">
+        <span>+</span>
+        <span className="text-[16px] md:text-[16px] text-black font-light leading-snug uppercase">
+          Redes Sociales <span className="text-[16px] md:text-[18px] text-black font-bold leading-tight">
+          ILIMITADAS<sup className="text-[10px]">*</sup>
+        </span>
+        </span>
+        
+        
+        <div className="flex gap-1.5 md:gap-2 mt-2 flex-wrap justify-center">
+          {plan.socials.map((s, i) => (
+            <div
+              key={i}
+              className={`app-icon social-${s} w-8 h-8 md:w-9 md:h-9 rounded-lg shadow flex items-center justify-center`}
+            >
+              <FontAwesomeIcon icon={socialConfig[s].icon} style={{ fontSize: '20px' }} className="md:text-[2.2em]" />
+            </div>
+          ))}
+        </div>
       </div>
+      <p className="text-[11px] text-black font-normal tracking-widest mb-1.5 uppercase leading-none mt-5">
+          Conservando tu mismo número
+        </p>
 
       {/* ZONA 3: Precio */}
       <div className="flex flex-col items-center w-full px-8 pt-4 pb-6">
-        <span className="text-[10px] md:text-[12px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
+        <span className="text-[14px] md:text-[16px] text-black font-normal tracking-widest uppercase mb-1">POR SOLO</span>
         <div className="flex items-start tracking-tighter justify-center leading-none">
-          <span className="text-[46px] md:text-[56px] font-semibold text-black leading-none">${plan.price}</span>
-          <span className="text-[16px] md:text-[20px] font-bold text-black mt-1 leading-none">*</span>
+          <span className="text-[56px] md:text-[64px] font-semibold text-black leading-none">${plan.price}</span>
+          <span className="text-[20px] md:text-[20px] font-bold text-black mt-1 leading-none">*</span>
         </div>
-        <span className="text-[12px] md:text-[14px] text-black font-light mt-0.5 tracking-widest leading-none">al mes</span>
+        <span className="text-[14px] md:text-[16px] text-black font-light mt-0.5 tracking-widest leading-none">al mes</span>
       </div>
 
       {/* Botón */}
       <button
-        className="absolute -bottom-[24px] px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 rounded-full text-[16px] md:text-[20px] font-semibold text-white shadow-xl transition-colors duration-300"
+        className="absolute -bottom-[24px] uppercase px-8 md:px-12 flex justify-center py-2.5 md:py-3.5 rounded-full text-[18px] md:text-[20px] font-semibold text-white shadow-xl transition-colors duration-300"
         style={{ backgroundColor: 'var(--card-ind-btn-bg)' }}
         onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--card-ind-btn-hover)'}
         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--card-ind-btn-bg)'}
       >
-        ¡LO QUIERO!
+        ¡Contrata aquí!
       </button>
     </div>
   );
