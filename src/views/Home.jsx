@@ -37,7 +37,7 @@ const plans = [
     title: 'PLAN 2 LÍNEAS',
     lines: [
   <>1 línea de 38 GB<sup className='text-[12px] md:top-[28px] md:left-[-10px]'>*</sup></>,
-  <>1 línea de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-40px] md:left-[5px]'>*</sup></>
+  <>1 línea de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-45px] md:left-[5px]'>*</sup></>
 ],
     price: '270',
     image: paq2Lineas
@@ -46,7 +46,7 @@ const plans = [
     title: 'PLAN 3 LÍNEAS',
     lines: [
   <>1 línea de 38 GB<sup className='text-[12px] md:top-[28px] md:left-[0px]'>*</sup></>,
-  <>2 líneas de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-40px] md:left-[-5px]'>*</sup></>
+  <>2 líneas de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-45px] md:left-[-5px]'>*</sup></>
 ],
     price: '360',
     image: paq3Lineas
@@ -55,7 +55,7 @@ const plans = [
     title: 'PLAN 4 LÍNEAS',
     lines: [
   <>1 línea de 38 GB<sup className='text-[12px] md:top-[28px] md:left-[0px]'>*</sup></>,
-  <>3 líneas de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-40px] md:left-[-5px]'>*</sup></>
+  <>3 líneas de 6 GB <sup className='text-[12px] left-[-5px] md:top-[-45px] md:left-[-5px]'>*</sup></>
 ],
     price: '450',
     image: paq4Lineas
@@ -809,12 +809,12 @@ function CardPlan({ plan }) {
 
       {/* Contenido */}
       <div className="text-center mt-6 px-4 w-full flex-grow flex flex-col">
-        <h3 className="text-[28px] md:text-[34px] font-semibold text-black leading-tight mb-2">
+        <h3 className="text-[32px] md:text-[34px] font-semibold text-black leading-tight mb-2">
           {plan.title}
         </h3>
         <div className="flex flex-col gap-1 mb-4">
           {plan.lines.map((line, i) => (
-            <p key={i} className="text-[20px] md:text-[24px] font-normal text-black leading-tight">{line}</p>
+            <p key={i} className="text-[24px] md:text-[26px] font-normal text-black leading-tight">{line}</p>
           ))}
         </div>
         <p className="text-[11px] text-black font-normal tracking-widest mb-1.5 uppercase leading-none">

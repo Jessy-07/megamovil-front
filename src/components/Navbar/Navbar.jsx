@@ -103,22 +103,20 @@ export default function Navbar() {
               CONSULTA
               <FontAwesomeIcon icon={faChevronDown} className={`nav-chevron ${consultaOpen ? 'nav-chevron--open' : ''}`} />
             </button>
-            {consultaOpen && (
-              <div className="nav-dropdown__menu">
-                <button
-                  className={`nav-dropdown__item${location.pathname === '/roaming-internacional' ? ' nav-dropdown__item--active' : ''}`}
-                  onClick={() => {
-                    handleNavigate('/roaming-internacional');
-                    setConsultaOpen(false);
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  Roaming Internacional
-                </button>
-              </div>
-            )}
+            <div className={`nav-dropdown__menu${consultaOpen ? ' nav-dropdown__menu--open' : ''}`}>
+              <button
+                className={`nav-dropdown__item${location.pathname === '/roaming-internacional' ? ' nav-dropdown__item--active' : ''}`}
+                onClick={() => {
+                  handleNavigate('/roaming-internacional');
+                  setConsultaOpen(false);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                Roaming Internacional
+              </button>
+            </div>
           </div>
-          <a href="#cambia" className="nav-pill nav-pill--orange" onClick={() => setIsMobileMenuOpen(false)}>CÁMBIA TU LÍNEA</a>
+          <a href="#cambia" className="nav-pill" onClick={() => setIsMobileMenuOpen(false)}>CÁMBIA TU LÍNEA</a>
           <a href="#promociones" className="nav-pill" onClick={() => setIsMobileMenuOpen(false)}>PROMOCIONES</a>
           <a href="#tienda" className="nav-pill" onClick={() => setIsMobileMenuOpen(false)}>TIENDA</a>
           <a href="#esim" className="nav-pill" onClick={() => setIsMobileMenuOpen(false)}>eSIM</a>

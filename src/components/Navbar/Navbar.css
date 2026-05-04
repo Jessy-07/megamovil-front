@@ -112,9 +112,9 @@
   white-space: nowrap;
 }
 
+
 .nav-pill:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.8);
+  background-color: #FF851B;
 }
 
 .nav-pill--orange {
@@ -185,7 +185,8 @@
 .nav-pill--dropdown {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  justify-content: center;
   cursor: pointer;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -216,6 +217,12 @@
   box-shadow: var(--shadow-xl);
   z-index: 200;
   animation: dropdownIn 0.2s ease;
+  /* Oculto por defecto — se muestra con --open */
+  display: none;
+}
+
+.nav-dropdown__menu--open {
+  display: block;
 }
 
 @keyframes dropdownIn {
@@ -239,10 +246,16 @@
   cursor: pointer;
 }
 
-.nav-dropdown__item:hover,
 .nav-dropdown__item--active {
   background-color: var(--color-orange-brand);
   color: #ffffff;
+}
+
+@media (hover: hover) {
+  .nav-dropdown__item:hover {
+    background-color: var(--color-orange-brand);
+    color: #ffffff;
+  }
 }
 
 /* ── Responsive Menu ── */
@@ -262,14 +275,16 @@
     width: 100%;
     flex-direction: column;
     background-color: var(--color-blue-primary, #3178f5);
-    padding: 20px;
-    gap: 15px;
+    padding: 16px 20px 24px;
+    gap: 10px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+    transform: translateY(-8px);
+    transition: opacity 0.28s ease,
+                transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.28s;
     border-radius: 0 0 1.5rem 1.5rem;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
     align-items: center;
     pointer-events: none;
   }
@@ -281,24 +296,103 @@
     pointer-events: auto;
   }
 
-  /* Mobile dropdown: no absolute, se integra en el flujo del menú */
+  /* Todos los items del menú con ancho uniforme */
+  .navbar-links .nav-pill {
+    width: min(80%, 300px);
+    text-align: center;
+  }
+
+  /* Mobile dropdown: acordeón conectado a CONSULTA */
+  .nav-dropdown {
+    width: min(80%, 300px);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  /* El botón CONSULTA ocupa todo el ancho del wrapper */
+  .nav-dropdown .nav-pill--dropdown {
+    width: 100%;
+  }
+
+  /* Cuando CONSULTA está abierto, quita el radio inferior para conectar con el menú */
+  .nav-pill--orange.nav-pill--dropdown {
+    transition: border-radius 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .nav-dropdown:has(.nav-dropdown__menu--open) .nav-pill--orange.nav-pill--dropdown {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-color: rgba(255, 255, 255, 0.25);
+  }
+
   .nav-dropdown__menu {
     position: static;
-    box-shadow: none;
-    border-radius: var(--radius-sm);
-    animation: none;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.15);
+    background: #0000001e;
+    border-radius: 0 0 1.2rem 1.2rem;
+    border: 1px solid #ffffff57;
+    border-top: none;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    margin: 0;
+    padding: 0 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    /* Acordeón: oculto por defecto */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.25s ease,
+                padding 0.32s ease;
+  }
+
+  .nav-dropdown__menu--open {
+    max-height: 200px;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 8px 14px 14px;
   }
 
   .nav-dropdown__item {
     color: #ffffff;
     text-align: center;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    width: 100%;
+    transition: background-color 0.18s ease, border-color 0.18s ease,
+                color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+    display: block;
   }
 
-  .nav-dropdown__item:hover,
+  /* Hover — solo visible en dispositivos con puntero */
+  @media (hover: hover) {
+    .nav-dropdown__item:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-color: #ffffff;
+    }
+  }
+
+  /* Tap feedback */
+  .nav-dropdown__item:active {
+    transform: scale(0.96);
+    background-color: var(--color-orange-brand);
+    border-color: var(--color-orange-brand);
+  }
+
+  /* Página activa — naranja, igual que el CTA principal */
   .nav-dropdown__item--active {
     background-color: var(--color-orange-brand);
+    border-color: var(--color-orange-brand);
     color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(255, 133, 27, 0.4);
   }
 }
